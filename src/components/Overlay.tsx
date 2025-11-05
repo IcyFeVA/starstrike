@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { invoke } from '@tauri-apps/api/core';
 import { getCurrentWindow } from '@tauri-apps/api/window';
 import { Edit3, MessageSquare, PenTool, Loader2, Copy, Check } from 'lucide-react';
@@ -13,6 +13,7 @@ const Overlay: React.FC<OverlayProps> = () => {
   const [selectedTone, setSelectedTone] = useState('professional');
   const [copied, setCopied] = useState(false);
   const [autoCloseEnabled, setAutoCloseEnabled] = useState(false);
+  const sendButtonRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
     // Load clipboard text when component mounts
@@ -32,10 +33,16 @@ const Overlay: React.FC<OverlayProps> = () => {
       // Only reload clipboard if we're not in an auto-close scenario
       // to prevent interference with the shortcut behavior
       loadClipboardText();
+
+      // Focus the "Send to AI" button when the window is shown
+      // and the current action is 'proofread'
+      if (selectedAction === 'proofread' && sendButtonRef.current) {
+        sendButtonRef.current.focus();
+      }      
     };
 
     window.addEventListener('focus', handleFocus);
-    return () => window.removeEventListener('focus', handleFocus);
+    //return () => window.removeEventListener('focus', handleFocus);
   }, [selectedAction, autoCloseEnabled]);
 
   const loadClipboardText = async () => {
@@ -209,6 +216,7 @@ const Overlay: React.FC<OverlayProps> = () => {
         {selectedAction && (
           <div className="send-button-container">
             <button
+              ref={sendButtonRef}
               onClick={handleSendToAI}
               disabled={isLoading}
               className="send-button"
