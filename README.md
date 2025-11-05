@@ -1,7 +1,7 @@
 
-# Wraiter — AI Quick Actions Desktop Tool
+# Starstrike — AI Quick Actions Desktop Tool
 
-Wraiter is a lightweight, cross-platform desktop utility (Windows + macOS) that gives you access to AI-powered quick text actions from anywhere on your system via a global shortcut. It opens a minimal overlay where you can proofread, rewrite with a different tone, or draft new content using OpenRouter-backed models.
+Starstrike is a lightweight, cross-platform desktop utility (Windows + macOS) that gives you access to AI-powered quick text actions from anywhere on your system via a global shortcut. It opens a minimal overlay where you can proofread, rewrite with a different tone, or draft new content using OpenRouter-backed models.
 
 Key goals:
 - Fast global shortcut to open a small overlay window
@@ -63,7 +63,7 @@ Available scripts (defined in `package.json`):
 
 ## Configuration & Secrets
 
-Wraiter requires an OpenRouter (or compatible) API key to call models. Store keys in the app settings UI; they are persisted locally using the Tauri store plugin. Do not commit secrets to source control.
+Starstrike requires an OpenRouter (or compatible) API key to call models. Store keys in the app settings UI; they are persisted locally using the Tauri store plugin. Do not commit secrets to source control.
 
 ## Architecture notes
 
