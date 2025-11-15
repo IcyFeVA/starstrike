@@ -19,6 +19,7 @@ const API_KEY: &str = "openrouter_api_key";
 
 // Global static for debouncing shortcut triggers
 static LAST_SHORTCUT_TRIGGER: Mutex<Option<Instant>> = Mutex::new(None);
+static WINDOW_IS_VISIBLE: Mutex<bool> = Mutex::new(true);
 
 #[tauri::command]
 fn get_shortcut(app: tauri::AppHandle) -> Result<String, String> {
@@ -162,8 +163,10 @@ async fn set_api_key(app: tauri::AppHandle, api_key: String) -> Result<(), Strin
 #[tauri::command]
 async fn show_overlay(app: tauri::AppHandle) -> Result<(), String> {
     if let Some(window) = app.get_webview_window("main") {
-        if window.is_visible().unwrap_or(false) {
+        let mut is_visible = WINDOW_IS_VISIBLE.lock().unwrap();
+        if *is_visible {
             window.hide().map_err(|e| e.to_string())?;
+            *is_visible = false;
         } else {
             window.show().map_err(|e| e.to_string())?;
             #[cfg(target_os = "linux")]
@@ -173,6 +176,7 @@ async fn show_overlay(app: tauri::AppHandle) -> Result<(), String> {
             }
             window.center().map_err(|e| e.to_string())?;
             window.set_focus().map_err(|e| e.to_string())?;
+            *is_visible = true;
         }
     } else {
         return Err("Main window not found".to_string());
@@ -395,6 +399,9 @@ pub fn run() {
                         "show" => {
                             if let Some(window) = app.get_webview_window("main") {
                                 let _ = window.show();
+                                if let Ok(mut is_visible) = WINDOW_IS_VISIBLE.lock() {
+                                    *is_visible = true;
+                                }
                                 let _ = window.set_focus();
                             }
                         }
@@ -423,6 +430,9 @@ pub fn run() {
             if let Ok(is_enabled) = app.autolaunch().is_enabled() {
                 if is_enabled {
                     let _ = window.hide();
+                    if let Ok(mut is_visible) = WINDOW_IS_VISIBLE.lock() {
+                        *is_visible = false;
+                    }
                 }
             }
             
@@ -430,6 +440,9 @@ pub fn run() {
             window.on_window_event(move |event| {
                 if let tauri::WindowEvent::CloseRequested { api, .. } = event {
                     window_.hide().unwrap();
+                    if let Ok(mut is_visible) = WINDOW_IS_VISIBLE.lock() {
+                        *is_visible = false;
+                    }
                     api.prevent_close();
                 }
             });
