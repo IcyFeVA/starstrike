@@ -165,13 +165,12 @@ async fn show_overlay(app: tauri::AppHandle) -> Result<(), String> {
         if window.is_visible().unwrap_or(false) {
             window.hide().map_err(|e| e.to_string())?;
         } else {
+            window.show().map_err(|e| e.to_string())?;
             #[cfg(target_os = "linux")]
             {
-                // On Linux, we need to manually set the window to be skipped by the taskbar
-                // This is a workaround for some window managers that don't respect the .hide() call
-                window.set_skip_taskbar(true).map_err(|e| e.to_string())?;
+                // On Linux, we need to manually unminimize and focus the window
+                window.unminimize().map_err(|e| e.to_string())?;
             }
-            window.show().map_err(|e| e.to_string())?;
             window.center().map_err(|e| e.to_string())?;
             window.set_focus().map_err(|e| e.to_string())?;
         }
@@ -419,12 +418,6 @@ pub fn run() {
 
             let window = app.get_webview_window("main").unwrap();
 
-            #[cfg(target_os = "linux")]
-            {
-                // On Linux, we need to manually set the window to be skipped by the taskbar
-                // This is a workaround for some window managers that don't respect the .hide() call
-                window.set_skip_taskbar(true).map_err(|e| e.to_string())?;
-            }
 
             // Check if autostart is enabled and hide window if so
             if let Ok(is_enabled) = app.autolaunch().is_enabled() {
