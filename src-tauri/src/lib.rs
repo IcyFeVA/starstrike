@@ -73,7 +73,7 @@ async fn set_shortcut(app: tauri::AppHandle, shortcut: String) -> Result<(), Str
     let store_path = config_dir.join("settings.json");
     let store = StoreBuilder::new(&app, store_path).build().map_err(|e| e.to_string())?;
     store.reload().map_err(|e| e.to_string())?;
-    store.set(SHORTCUT_KEY..to_string(), serde_json::Value::String(shortcut));
+    store.set(SHORTCUT_KEY.to_string(), serde_json::Value::String(shortcut));
     store.save().map_err(|e| e.to_string())?;
 
     Ok(())
@@ -161,11 +161,16 @@ async fn set_api_key(app: tauri::AppHandle, api_key: String) -> Result<(), Strin
 
 #[tauri::command]
 async fn show_overlay(app: tauri::AppHandle) -> Result<(), String> {
-    // Get the main window instead of trying to create a new overlay window
     if let Some(window) = app.get_webview_window("main") {
         if window.is_visible().unwrap_or(false) {
             window.hide().map_err(|e| e.to_string())?;
         } else {
+            #[cfg(target_os = "linux")]
+            {
+                // On Linux, we need to manually set the window to be skipped by the taskbar
+                // This is a workaround for some window managers that don't respect the .hide() call
+                window.set_skip_taskbar(true).map_err(|e| e.to_string())?;
+            }
             window.show().map_err(|e| e.to_string())?;
             window.center().map_err(|e| e.to_string())?;
             window.set_focus().map_err(|e| e.to_string())?;
@@ -413,7 +418,14 @@ pub fn run() {
                 .build(app)?;
 
             let window = app.get_webview_window("main").unwrap();
-            
+
+            #[cfg(target_os = "linux")]
+            {
+                // On Linux, we need to manually set the window to be skipped by the taskbar
+                // This is a workaround for some window managers that don't respect the .hide() call
+                window.set_skip_taskbar(true).map_err(|e| e.to_string())?;
+            }
+
             // Check if autostart is enabled and hide window if so
             if let Ok(is_enabled) = app.autolaunch().is_enabled() {
                 if is_enabled {
