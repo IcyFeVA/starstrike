@@ -10,7 +10,7 @@ use std::str::FromStr;
 use std::time::{Duration, Instant};
 use std::sync::Mutex;
 use std::fs;
-
+//
 
 const SHORTCUT_KEY: &str = "shortcut";
 const AUTO_CLOSE_KEY: &str = "auto_close";
@@ -73,7 +73,7 @@ async fn set_shortcut(app: tauri::AppHandle, shortcut: String) -> Result<(), Str
     let store_path = config_dir.join("settings.json");
     let store = StoreBuilder::new(&app, store_path).build().map_err(|e| e.to_string())?;
     store.reload().map_err(|e| e.to_string())?;
-    store.set(SHORTCUT_KEY.to_string(), serde_json::Value::String(shortcut));
+    store.set(SHORTCUT_KEY..to_string(), serde_json::Value::String(shortcut));
     store.save().map_err(|e| e.to_string())?;
 
     Ok(())
