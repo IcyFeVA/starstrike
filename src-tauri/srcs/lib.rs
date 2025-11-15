@@ -1,21 +1,29 @@
 // Learn more about Tauri commands at https://tauri.app/develop/calling-rust/
 use tauri::Manager;
-use tauri::menu::{Menu, MenuItem};
+use tauri::menu::{Menu, MenuItem, CheckMenuItem};
 use tauri::tray::TrayIconBuilder;
 use tauri_plugin_autostart::{MacosLauncher, ManagerExt};
 use tauri_plugin_clipboard_manager::ClipboardExt;
-use tauri_plugin_global_shortcut::{GlobalShortcutExt, Shortcut};
-use tauri_plugin_store::{Store, StoreBuilder};
+use tauri_plugin_global_shortcut::{GlobalShortcutExt, Shortcut, ShortcutEvent};
+use tauri_plugin_store::{StoreBuilder};
 use std::str::FromStr;
-use tauri::Wry;
+use std::time::{Duration, Instant};
+use std::sync::Mutex;
+use std::fs;
+
 
 const SHORTCUT_KEY: &str = "shortcut";
+const AUTO_CLOSE_KEY: &str = "auto_close";
 const DEFAULT_SHORTCUT: &str = "CommandOrControl+Shift+A";
+const API_KEY: &str = "openrouter_api_key";
+
+// Global static for debouncing shortcut triggers
+static LAST_SHORTCUT_TRIGGER: Mutex<Option<Instant>> = Mutex::new(None);
 
 #[tauri::command]
 fn get_shortcut(app: tauri::AppHandle) -> Result<String, String> {
-    let mut store = StoreBuilder::new("settings.json").build(app.clone());
-    let _ = store.load();
+    let store = StoreBuilder::new(&app, "settings.json").build().map_err(|e| e.to_string())?;
+    store.reload().map_err(|e| e.to_string())?;
     match store.get(SHORTCUT_KEY) {
         Some(shortcut) => Ok(shortcut.as_str().unwrap().to_string()),
         None => Ok(DEFAULT_SHORTCUT.to_string()),
@@ -30,13 +38,32 @@ async fn set_shortcut(app: tauri::AppHandle, shortcut: String) -> Result<(), Str
 
     let new_shortcut = Shortcut::from_str(&shortcut).map_err(|e| e.to_string())?;
 
+    let show_overlay_callback = move |app: &tauri::AppHandle, _shortcut: &Shortcut, _event: ShortcutEvent| {
+        // Debounce rapid shortcut triggers (ignore if triggered within 200ms)
+        if let Ok(mut last_trigger) = LAST_SHORTCUT_TRIGGER.lock() {
+            if let Some(last) = *last_trigger {
+                if last.elapsed() < Duration::from_millis(200) {
+                    return; // Ignore rapid successive triggers
+                }
+            }
+            *last_trigger = Some(Instant::now());
+        }
+
+        let app_handle_clone = app.clone();
+        tauri::async_runtime::spawn(async move {
+            if let Err(e) = show_overlay(app_handle_clone).await {
+                eprintln!("Failed to show overlay: {}", e);
+            }
+        });
+    };
+
     app.global_shortcut()
-        .register(new_shortcut)
+        .on_shortcut(new_shortcut, show_overlay_callback)
         .map_err(|e| e.to_string())?;
 
-    let mut store = StoreBuilder::new("settings.json").build(app.clone());
-    let _ = store.load();
-    store.insert(SHORTCUT_KEY.to_string(), serde_json::Value::String(shortcut));
+    let store = StoreBuilder::new(&app, "settings.json").build().map_err(|e| e.to_string())?;
+    store.reload().map_err(|e| e.to_string())?;
+    store.set(SHORTCUT_KEY.to_string(), serde_json::Value::String(shortcut));
     store.save().map_err(|e| e.to_string())?;
 
     Ok(())
@@ -63,6 +90,51 @@ async fn is_autostart_enabled(app: tauri::AppHandle) -> Result<bool, String> {
 }
 
 #[tauri::command]
+fn get_auto_close(app: tauri::AppHandle) -> Result<bool, String> {
+    let store = StoreBuilder::new(&app, "settings.json").build().map_err(|e| e.to_string())?;
+    store.reload().map_err(|e| e.to_string())?;
+    match store.get(AUTO_CLOSE_KEY) {
+        Some(auto_close) => Ok(auto_close.as_bool().unwrap_or(true)),
+        None => Ok(true), // Default to true
+    }
+}
+
+#[tauri::command]
+async fn set_auto_close(app: tauri::AppHandle, auto_close: bool) -> Result<(), String> {
+    let store = StoreBuilder::new(&app, "settings.json").build().map_err(|e| e.to_string())?;
+    store.reload().map_err(|e| e.to_string())?;
+    store.set(AUTO_CLOSE_KEY.to_string(), serde_json::Value::Bool(auto_close));
+    store.save().map_err(|e| e.to_string())?;
+    Ok(())
+}
+
+// Get the saved OpenRouter API key from the persistent store
+#[tauri::command]
+fn get_api_key(app: tauri::AppHandle) -> Result<String, String> {
+    let store = StoreBuilder::new(&app, "settings.json").build().map_err(|e| e.to_string())?;
+    store.reload().map_err(|e| e.to_string())?;
+    match store.get(API_KEY) {
+        Some(val) => Ok(val.as_str().unwrap_or_default().to_string()),
+        None => Ok(String::new()),
+    }
+}
+
+// Save the OpenRouter API key into the persistent store
+#[tauri::command]
+async fn set_api_key(app: tauri::AppHandle, api_key: String) -> Result<(), String> {
+    let config_dir = app.path().app_config_dir().ok_or_else(|| "Failed to get app config dir".to_string())?;
+    if !config_dir.exists() {
+        fs::create_dir_all(&config_dir).map_err(|e| e.to_string())?;
+    }
+    let store_path = config_dir.join("settings.json");
+    let store = StoreBuilder::new(&app, store_path).build().map_err(|e| e.to_string())?;
+    store.reload().map_err(|e| e.to_string())?;
+    store.set(API_KEY.to_string(), serde_json::Value::String(api_key));
+    store.save().map_err(|e| e.to_string())?;
+    Ok(())
+}
+
+#[tauri::command]
 async fn show_overlay(app: tauri::AppHandle) -> Result<(), String> {
     // Get the main window instead of trying to create a new overlay window
     if let Some(window) = app.get_webview_window("main") {
@@ -73,6 +145,16 @@ async fn show_overlay(app: tauri::AppHandle) -> Result<(), String> {
             window.center().map_err(|e| e.to_string())?;
             window.set_focus().map_err(|e| e.to_string())?;
         }
+    } else {
+        return Err("Main window not found".to_string());
+    }
+    Ok(())
+}
+
+#[tauri::command]
+async fn hide_overlay(app: tauri::AppHandle) -> Result<(), String> {
+    if let Some(window) = app.get_webview_window("main") {
+        window.hide().map_err(|e| e.to_string())?;
     } else {
         return Err("Main window not found".to_string());
     }
@@ -238,9 +320,12 @@ pub fn run() {
             Some(vec!["--flag1", "--flag2"]),
         ))
         .plugin(tauri_plugin_opener::init())
-        .plugin(tauri_plugin_clipboard_.build())
+        .plugin(tauri_plugin_clipboard_manager::init())
+        .plugin(tauri_plugin_global_shortcut::Builder::new().build())
+        .plugin(tauri_plugin_store::Builder::default().build())
         .invoke_handler(tauri::generate_handler![
             show_overlay,
+            hide_overlay,
             get_clipboard_text,
             set_clipboard_text,
             fetch_openrouter_models,
@@ -251,31 +336,26 @@ pub fn run() {
             reset_shortcut,
             enable_autostart,
             disable_autostart,
-            is_autostart_enabled
+            is_autostart_enabled,
+            get_auto_close,
+            get_api_key,
+            set_auto_close
+            ,
+            set_api_key
         ])
         .setup(|app| {
             let app_handle = app.handle().clone();
             tauri::async_runtime::spawn(async move {
                 let shortcut = get_shortcut(app_handle.clone()).unwrap_or_else(|_| DEFAULT_SHORTCUT.to_string());
-                if let Err(e) = set_shortcut(app_handle.clone(), shortcut).await {
+                if let Err(e) = set_shortcut(app_handle.clone(), shortcut.clone()).await {
                     eprintln!("Failed to set initial shortcut: {}", e);
-                }
-
-                let app_handle_clone = app_handle.clone();
-                if let Err(e) = app_handle.global_shortcut().on_shortcut(move |_shortcut, _press_time| {
-                    let app_handle_clone_clone = app_handle_clone.clone();
-                    tauri::async_runtime::spawn(async move {
-                        if let Err(e) = show_overlay(app_handle_clone_clone).await {
-                            eprintln!("Failed to show overlay: {}", e);
-                        }
-                    });
-                }) {
-                     eprintln!("Failed to register shortcut handler: {}", e);
                 }
             });
 
+            let autostart_manager = app.autolaunch();
+            let is_enabled = autostart_manager.is_enabled().unwrap_or(false);
             let show = MenuItem::with_id(app, "show", "Show UI", true, None::<&str>)?;
-            let startup = MenuItem::with_id(app, "startup", "Start on Boot", true, None::<&str>)?;
+            let startup = CheckMenuItem::with_id(app, "startup", "Start on Boot", true, is_enabled, None::<&str>)?;
             let exit = MenuItem::with_id(app, "exit", "Exit App", true, None::<&str>)?;
             let menu = Menu::with_items(app, &[&show, &startup, &exit])?;
             let _tray = TrayIconBuilder::new()
@@ -308,6 +388,14 @@ pub fn run() {
                 .build(app)?;
 
             let window = app.get_webview_window("main").unwrap();
+
+            // Check if autostart is enabled and hide window if so
+            if let Ok(is_enabled) = app.autolaunch().is_enabled() {
+                if is_enabled {
+                    let _ = window.hide();
+                }
+            }
+
             let window_ = window.clone();
             window.on_window_event(move |event| {
                 if let tauri::WindowEvent::CloseRequested { api, .. } = event {
