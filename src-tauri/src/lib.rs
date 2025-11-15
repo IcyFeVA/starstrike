@@ -9,6 +9,7 @@ use tauri_plugin_store::{StoreBuilder};
 use std::str::FromStr;
 use std::time::{Duration, Instant};
 use std::sync::Mutex;
+use std::fs;
 
 
 const SHORTCUT_KEY: &str = "shortcut";
@@ -21,7 +22,12 @@ static LAST_SHORTCUT_TRIGGER: Mutex<Option<Instant>> = Mutex::new(None);
 
 #[tauri::command]
 fn get_shortcut(app: tauri::AppHandle) -> Result<String, String> {
-    let store = StoreBuilder::new(&app, "settings.json").build().map_err(|e| e.to_string())?;
+    let config_dir = app.path().app_config_dir().map_err(|e| e.to_string())?;
+    if !config_dir.exists() {
+        fs::create_dir_all(&config_dir).map_err(|e| e.to_string())?;
+    }
+    let store_path = config_dir.join("settings.json");
+    let store = StoreBuilder::new(&app, store_path).build().map_err(|e| e.to_string())?;
     store.reload().map_err(|e| e.to_string())?;
     match store.get(SHORTCUT_KEY) {
         Some(shortcut) => Ok(shortcut.as_str().unwrap().to_string()),
@@ -60,7 +66,12 @@ async fn set_shortcut(app: tauri::AppHandle, shortcut: String) -> Result<(), Str
         .on_shortcut(new_shortcut, show_overlay_callback)
         .map_err(|e| e.to_string())?;
 
-    let store = StoreBuilder::new(&app, "settings.json").build().map_err(|e| e.to_string())?;
+    let config_dir = app.path().app_config_dir().map_err(|e| e.to_string())?;
+    if !config_dir.exists() {
+        fs::create_dir_all(&config_dir).map_err(|e| e.to_string())?;
+    }
+    let store_path = config_dir.join("settings.json");
+    let store = StoreBuilder::new(&app, store_path).build().map_err(|e| e.to_string())?;
     store.reload().map_err(|e| e.to_string())?;
     store.set(SHORTCUT_KEY.to_string(), serde_json::Value::String(shortcut));
     store.save().map_err(|e| e.to_string())?;
@@ -90,7 +101,12 @@ async fn is_autostart_enabled(app: tauri::AppHandle) -> Result<bool, String> {
 
 #[tauri::command]
 fn get_auto_close(app: tauri::AppHandle) -> Result<bool, String> {
-    let store = StoreBuilder::new(&app, "settings.json").build().map_err(|e| e.to_string())?;
+    let config_dir = app.path().app_config_dir().map_err(|e| e.to_string())?;
+    if !config_dir.exists() {
+        fs::create_dir_all(&config_dir).map_err(|e| e.to_string())?;
+    }
+    let store_path = config_dir.join("settings.json");
+    let store = StoreBuilder::new(&app, store_path).build().map_err(|e| e.to_string())?;
     store.reload().map_err(|e| e.to_string())?;
     match store.get(AUTO_CLOSE_KEY) {
         Some(auto_close) => Ok(auto_close.as_bool().unwrap_or(true)),
@@ -100,7 +116,12 @@ fn get_auto_close(app: tauri::AppHandle) -> Result<bool, String> {
 
 #[tauri::command]
 async fn set_auto_close(app: tauri::AppHandle, auto_close: bool) -> Result<(), String> {
-    let store = StoreBuilder::new(&app, "settings.json").build().map_err(|e| e.to_string())?;
+    let config_dir = app.path().app_config_dir().map_err(|e| e.to_string())?;
+    if !config_dir.exists() {
+        fs::create_dir_all(&config_dir).map_err(|e| e.to_string())?;
+    }
+    let store_path = config_dir.join("settings.json");
+    let store = StoreBuilder::new(&app, store_path).build().map_err(|e| e.to_string())?;
     store.reload().map_err(|e| e.to_string())?;
     store.set(AUTO_CLOSE_KEY.to_string(), serde_json::Value::Bool(auto_close));
     store.save().map_err(|e| e.to_string())?;
@@ -110,7 +131,12 @@ async fn set_auto_close(app: tauri::AppHandle, auto_close: bool) -> Result<(), S
 // Get the saved OpenRouter API key from the persistent store
 #[tauri::command]
 fn get_api_key(app: tauri::AppHandle) -> Result<String, String> {
-    let store = StoreBuilder::new(&app, "settings.json").build().map_err(|e| e.to_string())?;
+    let config_dir = app.path().app_config_dir().map_err(|e| e.to_string())?;
+    if !config_dir.exists() {
+        fs::create_dir_all(&config_dir).map_err(|e| e.to_string())?;
+    }
+    let store_path = config_dir.join("settings.json");
+    let store = StoreBuilder::new(&app, store_path).build().map_err(|e| e.to_string())?;
     store.reload().map_err(|e| e.to_string())?;
     match store.get(API_KEY) {
         Some(val) => Ok(val.as_str().unwrap_or_default().to_string()),
@@ -121,7 +147,12 @@ fn get_api_key(app: tauri::AppHandle) -> Result<String, String> {
 // Save the OpenRouter API key into the persistent store
 #[tauri::command]
 async fn set_api_key(app: tauri::AppHandle, api_key: String) -> Result<(), String> {
-    let store = StoreBuilder::new(&app, "settings.json").build().map_err(|e| e.to_string())?;
+    let config_dir = app.path().app_config_dir().map_err(|e| e.to_string())?;
+    if !config_dir.exists() {
+        fs::create_dir_all(&config_dir).map_err(|e| e.to_string())?;
+    }
+    let store_path = config_dir.join("settings.json");
+    let store = StoreBuilder::new(&app, store_path).build().map_err(|e| e.to_string())?;
     store.reload().map_err(|e| e.to_string())?;
     store.set(API_KEY.to_string(), serde_json::Value::String(api_key));
     store.save().map_err(|e| e.to_string())?;
