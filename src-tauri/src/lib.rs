@@ -1,15 +1,15 @@
 // Learn more about Tauri commands at https://tauri.app/develop/calling-rust/
-use tauri::Manager;
-use tauri::menu::{Menu, MenuItem, CheckMenuItem};
+use std::fs;
+use std::str::FromStr;
+use std::sync::Mutex;
+use std::time::{Duration, Instant};
+use tauri::menu::{CheckMenuItem, Menu, MenuItem};
 use tauri::tray::TrayIconBuilder;
+use tauri::Manager;
 use tauri_plugin_autostart::{MacosLauncher, ManagerExt};
 use tauri_plugin_clipboard_manager::ClipboardExt;
 use tauri_plugin_global_shortcut::{GlobalShortcutExt, Shortcut, ShortcutEvent};
-use tauri_plugin_store::{StoreBuilder};
-use std::str::FromStr;
-use std::time::{Duration, Instant};
-use std::sync::Mutex;
-use std::fs;
+use tauri_plugin_store::StoreBuilder;
 //
 
 const SHORTCUT_KEY: &str = "shortcut";
@@ -19,7 +19,6 @@ const API_KEY: &str = "openrouter_api_key";
 
 // Global static for debouncing shortcut triggers
 static LAST_SHORTCUT_TRIGGER: Mutex<Option<Instant>> = Mutex::new(None);
-static WINDOW_IS_VISIBLE: Mutex<bool> = Mutex::new(true);
 
 #[tauri::command]
 fn get_shortcut(app: tauri::AppHandle) -> Result<String, String> {
@@ -28,7 +27,9 @@ fn get_shortcut(app: tauri::AppHandle) -> Result<String, String> {
         fs::create_dir_all(&config_dir).map_err(|e| e.to_string())?;
     }
     let store_path = config_dir.join("settings.json");
-    let store = StoreBuilder::new(&app, store_path).build().map_err(|e| e.to_string())?;
+    let store = StoreBuilder::new(&app, store_path)
+        .build()
+        .map_err(|e| e.to_string())?;
     store.reload().map_err(|e| e.to_string())?;
     match store.get(SHORTCUT_KEY) {
         Some(shortcut) => Ok(shortcut.as_str().unwrap().to_string()),
@@ -44,24 +45,25 @@ async fn set_shortcut(app: tauri::AppHandle, shortcut: String) -> Result<(), Str
 
     let new_shortcut = Shortcut::from_str(&shortcut).map_err(|e| e.to_string())?;
 
-    let show_overlay_callback = move |app: &tauri::AppHandle, _shortcut: &Shortcut, _event: ShortcutEvent| {
-        // Debounce rapid shortcut triggers (ignore if triggered within 200ms)
-        if let Ok(mut last_trigger) = LAST_SHORTCUT_TRIGGER.lock() {
-            if let Some(last) = *last_trigger {
-                if last.elapsed() < Duration::from_millis(200) {
-                    return; // Ignore rapid successive triggers
+    let show_overlay_callback =
+        move |app: &tauri::AppHandle, _shortcut: &Shortcut, _event: ShortcutEvent| {
+            // Debounce rapid shortcut triggers (ignore if triggered within 200ms)
+            if let Ok(mut last_trigger) = LAST_SHORTCUT_TRIGGER.lock() {
+                if let Some(last) = *last_trigger {
+                    if last.elapsed() < Duration::from_millis(400) {
+                        return; // Ignore rapid successive triggers
+                    }
                 }
+                *last_trigger = Some(Instant::now());
             }
-            *last_trigger = Some(Instant::now());
-        }
 
-        let app_handle_clone = app.clone();
-        tauri::async_runtime::spawn(async move {
-            if let Err(e) = show_overlay(app_handle_clone).await {
-                eprintln!("Failed to show overlay: {}", e);
-            }
-        });
-    };
+            let app_handle_clone = app.clone();
+            tauri::async_runtime::spawn(async move {
+                if let Err(e) = show_overlay(app_handle_clone).await {
+                    eprintln!("Failed to show overlay: {}", e);
+                }
+            });
+        };
 
     app.global_shortcut()
         .on_shortcut(new_shortcut, show_overlay_callback)
@@ -72,9 +74,14 @@ async fn set_shortcut(app: tauri::AppHandle, shortcut: String) -> Result<(), Str
         fs::create_dir_all(&config_dir).map_err(|e| e.to_string())?;
     }
     let store_path = config_dir.join("settings.json");
-    let store = StoreBuilder::new(&app, store_path).build().map_err(|e| e.to_string())?;
+    let store = StoreBuilder::new(&app, store_path)
+        .build()
+        .map_err(|e| e.to_string())?;
     store.reload().map_err(|e| e.to_string())?;
-    store.set(SHORTCUT_KEY.to_string(), serde_json::Value::String(shortcut));
+    store.set(
+        SHORTCUT_KEY.to_string(),
+        serde_json::Value::String(shortcut),
+    );
     store.save().map_err(|e| e.to_string())?;
 
     Ok(())
@@ -107,7 +114,9 @@ fn get_auto_close(app: tauri::AppHandle) -> Result<bool, String> {
         fs::create_dir_all(&config_dir).map_err(|e| e.to_string())?;
     }
     let store_path = config_dir.join("settings.json");
-    let store = StoreBuilder::new(&app, store_path).build().map_err(|e| e.to_string())?;
+    let store = StoreBuilder::new(&app, store_path)
+        .build()
+        .map_err(|e| e.to_string())?;
     store.reload().map_err(|e| e.to_string())?;
     match store.get(AUTO_CLOSE_KEY) {
         Some(auto_close) => Ok(auto_close.as_bool().unwrap_or(true)),
@@ -122,9 +131,14 @@ async fn set_auto_close(app: tauri::AppHandle, auto_close: bool) -> Result<(), S
         fs::create_dir_all(&config_dir).map_err(|e| e.to_string())?;
     }
     let store_path = config_dir.join("settings.json");
-    let store = StoreBuilder::new(&app, store_path).build().map_err(|e| e.to_string())?;
+    let store = StoreBuilder::new(&app, store_path)
+        .build()
+        .map_err(|e| e.to_string())?;
     store.reload().map_err(|e| e.to_string())?;
-    store.set(AUTO_CLOSE_KEY.to_string(), serde_json::Value::Bool(auto_close));
+    store.set(
+        AUTO_CLOSE_KEY.to_string(),
+        serde_json::Value::Bool(auto_close),
+    );
     store.save().map_err(|e| e.to_string())?;
     Ok(())
 }
@@ -137,7 +151,9 @@ fn get_api_key(app: tauri::AppHandle) -> Result<String, String> {
         fs::create_dir_all(&config_dir).map_err(|e| e.to_string())?;
     }
     let store_path = config_dir.join("settings.json");
-    let store = StoreBuilder::new(&app, store_path).build().map_err(|e| e.to_string())?;
+    let store = StoreBuilder::new(&app, store_path)
+        .build()
+        .map_err(|e| e.to_string())?;
     store.reload().map_err(|e| e.to_string())?;
     match store.get(API_KEY) {
         Some(val) => Ok(val.as_str().unwrap_or_default().to_string()),
@@ -153,7 +169,9 @@ async fn set_api_key(app: tauri::AppHandle, api_key: String) -> Result<(), Strin
         fs::create_dir_all(&config_dir).map_err(|e| e.to_string())?;
     }
     let store_path = config_dir.join("settings.json");
-    let store = StoreBuilder::new(&app, store_path).build().map_err(|e| e.to_string())?;
+    let store = StoreBuilder::new(&app, store_path)
+        .build()
+        .map_err(|e| e.to_string())?;
     store.reload().map_err(|e| e.to_string())?;
     store.set(API_KEY.to_string(), serde_json::Value::String(api_key));
     store.save().map_err(|e| e.to_string())?;
@@ -163,20 +181,21 @@ async fn set_api_key(app: tauri::AppHandle, api_key: String) -> Result<(), Strin
 #[tauri::command]
 async fn show_overlay(app: tauri::AppHandle) -> Result<(), String> {
     if let Some(window) = app.get_webview_window("main") {
-        let mut is_visible = WINDOW_IS_VISIBLE.lock().unwrap();
-        if *is_visible {
+        let is_visible = window.is_visible().map_err(|e| e.to_string())?;
+
+        if is_visible {
             window.hide().map_err(|e| e.to_string())?;
-            *is_visible = false;
         } else {
             window.show().map_err(|e| e.to_string())?;
+            window.set_always_on_top(true).map_err(|e| e.to_string())?;
+
             #[cfg(target_os = "linux")]
             {
-                // On Linux, we need to manually unminimize and focus the window
                 window.unminimize().map_err(|e| e.to_string())?;
             }
+
             window.center().map_err(|e| e.to_string())?;
             window.set_focus().map_err(|e| e.to_string())?;
-            *is_visible = true;
         }
     } else {
         return Err("Main window not found".to_string());
@@ -199,7 +218,7 @@ async fn get_clipboard_text(app: tauri::AppHandle) -> Result<String, String> {
     let clipboard = app.clipboard();
     match clipboard.read_text() {
         Ok(text) => Ok(text),
-        Err(e) => Err(format!("Failed to read clipboard: {}", e))
+        Err(e) => Err(format!("Failed to read clipboard: {}", e)),
     }
 }
 
@@ -208,7 +227,7 @@ async fn set_clipboard_text(app: tauri::AppHandle, text: String) -> Result<(), S
     let clipboard = app.clipboard();
     match clipboard.write_text(&text) {
         Ok(_) => Ok(()),
-        Err(e) => Err(format!("Failed to write to clipboard: {}", e))
+        Err(e) => Err(format!("Failed to write to clipboard: {}", e)),
     }
 }
 
@@ -234,24 +253,27 @@ async fn fetch_openrouter_models(api_key: String) -> Result<Vec<serde_json::Valu
                             Ok(Vec::new())
                         }
                     }
-                    Err(e) => Err(format!("Failed to parse models response: {}", e))
+                    Err(e) => Err(format!("Failed to parse models response: {}", e)),
                 }
             } else {
                 match resp.text().await {
                     Ok(error_text) => {
                         if status == 401 {
-                            Err(format!("Authentication failed (401 Unauthorized): {}", error_text))
+                            Err(format!(
+                                "Authentication failed (401 Unauthorized): {}",
+                                error_text
+                            ))
                         } else if status == 403 {
                             Err(format!("Access forbidden (403 Forbidden): {}", error_text))
                         } else {
                             Err(format!("API request failed ({}): {}", status, error_text))
                         }
-                    },
-                    Err(_) => Err(format!("API request failed with status: {}", status))
+                    }
+                    Err(_) => Err(format!("API request failed with status: {}", status)),
                 }
             }
         }
-        Err(e) => Err(format!("Failed to connect to OpenRouter API: {}", e))
+        Err(e) => Err(format!("Failed to connect to OpenRouter API: {}", e)),
     }
 }
 
@@ -262,7 +284,7 @@ async fn process_text_with_ai(
     model: String,
     api_key: String,
     tone: Option<String>,
-    max_tokens: Option<u32>
+    max_tokens: Option<u32>,
 ) -> Result<String, String> {
     let client = reqwest::Client::new();
 
@@ -311,7 +333,7 @@ async fn process_text_with_ai(
                             Err("No content in AI response".to_string())
                         }
                     }
-                    Err(e) => Err(format!("Failed to parse AI response: {}", e))
+                    Err(e) => Err(format!("Failed to parse AI response: {}", e)),
                 }
             } else {
                 let status = resp.status();
@@ -319,20 +341,26 @@ async fn process_text_with_ai(
                     Ok(error_text) => {
                         // Parse the error response to provide better error messages
                         if status == 401 {
-                            Err(format!("Authentication failed (401 Unauthorized): {}", error_text))
+                            Err(format!(
+                                "Authentication failed (401 Unauthorized): {}",
+                                error_text
+                            ))
                         } else if status == 403 {
                             Err(format!("Access forbidden (403 Forbidden): {}", error_text))
                         } else if status == 429 {
-                            Err(format!("Rate limit exceeded (429 Too Many Requests): {}", error_text))
+                            Err(format!(
+                                "Rate limit exceeded (429 Too Many Requests): {}",
+                                error_text
+                            ))
                         } else {
                             Err(format!("API request failed ({}): {}", status, error_text))
                         }
-                    },
-                    Err(_) => Err(format!("API request failed with status: {}", status))
+                    }
+                    Err(_) => Err(format!("API request failed with status: {}", status)),
                 }
             }
         }
-        Err(e) => Err(format!("Failed to connect to OpenRouter API: {}", e))
+        Err(e) => Err(format!("Failed to connect to OpenRouter API: {}", e)),
     }
 }
 
@@ -372,14 +400,14 @@ pub fn run() {
             is_autostart_enabled,
             get_auto_close,
             get_api_key,
-            set_auto_close
-            ,
+            set_auto_close,
             set_api_key
         ])
         .setup(|app| {
             let app_handle = app.handle().clone();
             tauri::async_runtime::spawn(async move {
-                let shortcut = get_shortcut(app_handle.clone()).unwrap_or_else(|_| DEFAULT_SHORTCUT.to_string());
+                let shortcut = get_shortcut(app_handle.clone())
+                    .unwrap_or_else(|_| DEFAULT_SHORTCUT.to_string());
                 if let Err(e) = set_shortcut(app_handle.clone(), shortcut.clone()).await {
                     eprintln!("Failed to set initial shortcut: {}", e);
                 }
@@ -388,65 +416,59 @@ pub fn run() {
             let autostart_manager = app.autolaunch();
             let is_enabled = autostart_manager.is_enabled().unwrap_or(false);
             let show = MenuItem::with_id(app, "show", "Show UI", true, None::<&str>)?;
-            let startup = CheckMenuItem::with_id(app, "startup", "Start on Boot", true, is_enabled, None::<&str>)?;
+            let startup = CheckMenuItem::with_id(
+                app,
+                "startup",
+                "Start on Boot",
+                true,
+                is_enabled,
+                None::<&str>,
+            )?;
             let exit = MenuItem::with_id(app, "exit", "Exit App", true, None::<&str>)?;
             let menu = Menu::with_items(app, &[&show, &startup, &exit])?;
             let _tray = TrayIconBuilder::new()
                 .icon(app.default_window_icon().unwrap().clone())
                 .menu(&menu)
-                .on_menu_event(move |app, event| {
-                    match event.id.as_ref() {
-                        "show" => {
-                            if let Some(window) = app.get_webview_window("main") {
-                                let _ = window.show();
-                                if let Ok(mut is_visible) = WINDOW_IS_VISIBLE.lock() {
-                                    *is_visible = true;
-                                }
-                                let _ = window.set_focus();
-                            }
+                .on_menu_event(move |app, event| match event.id.as_ref() {
+                    "show" => {
+                        if let Some(window) = app.get_webview_window("main") {
+                            let _ = window.show();
+                            let _ = window.set_focus();
                         }
-                        "startup" => {
-                            let autostart_manager = app.autolaunch();
-                            if let Ok(is_enabled) = autostart_manager.is_enabled() {
-                                if is_enabled {
-                                    let _ = autostart_manager.disable();
-                                } else {
-                                    let _ = autostart_manager.enable();
-                                }
-                            }
-                        }
-                        "exit" => {
-                            app.exit(0);
-                        }
-                        _ => {}
                     }
+                    "startup" => {
+                        let autostart_manager = app.autolaunch();
+                        if let Ok(is_enabled) = autostart_manager.is_enabled() {
+                            if is_enabled {
+                                let _ = autostart_manager.disable();
+                            } else {
+                                let _ = autostart_manager.enable();
+                            }
+                        }
+                    }
+                    "exit" => {
+                        app.exit(0);
+                    }
+                    _ => {}
                 })
                 .build(app)?;
 
             let window = app.get_webview_window("main").unwrap();
 
-
             // Check if autostart is enabled and hide window if so
             if let Ok(is_enabled) = app.autolaunch().is_enabled() {
                 if is_enabled {
                     let _ = window.hide();
-                    if let Ok(mut is_visible) = WINDOW_IS_VISIBLE.lock() {
-                        *is_visible = false;
-                    }
                 }
             }
-            
+
             let window_ = window.clone();
             window.on_window_event(move |event| {
                 if let tauri::WindowEvent::CloseRequested { api, .. } = event {
                     window_.hide().unwrap();
-                    if let Ok(mut is_visible) = WINDOW_IS_VISIBLE.lock() {
-                        *is_visible = false;
-                    }
                     api.prevent_close();
                 }
             });
-
             Ok(())
         })
         .run(tauri::generate_context!())
