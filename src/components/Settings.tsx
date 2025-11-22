@@ -188,16 +188,48 @@ const Settings: React.FC<SettingsProps> = () => {
             </button>
           </div>
 
-          <button
-            onClick={fetchModels}
-            disabled={isLoadingModels || !apiKey}
-            className={`settings__load-button ${isLoadingModels || !apiKey ? 'settings__load-button--disabled' : ''}`}
-          >
-            {isLoadingModels ? (
-              <Loader2 size={12} className="settings__spinner settings__button-icon" />
-            ) : null}
-            {isLoadingModels ? "Loading Models..." : "Load Available Models"}
-          </button>
+          {models.length == 0 && (
+            <button
+              onClick={fetchModels}
+              disabled={isLoadingModels || !apiKey}
+              className={`settings__load-button ${isLoadingModels || !apiKey ? 'settings__load-button--disabled' : ''}`}
+            >
+              {isLoadingModels ? (
+                <Loader2 size={12} className="settings__spinner settings__button-icon" />
+              ) : null}
+              {isLoadingModels ? "Loading Models..." : "Load Available Models"}
+            </button>
+          )}
+
+          {/* Model Selection Section */}
+          {models.length > 0 && (
+            <section className="settings__section">
+              <h3 className="settings__section-title">Model Selection</h3>
+              <div className="settings__select-container">
+                <div className="select-wrapper">
+                  <select
+                    value={selectedModel}
+                    onChange={(e) => {
+                      setSelectedModel(e.target.value)
+                      localStorage.setItem('selected_model', e.target.value);
+                      setMessage({ type: 'success', text: 'Model selection saved!' });
+                    }}
+                    className="settings__model-select"
+                  >
+                    <option value="">Select a model...</option>
+                    {[...models]
+                      .sort((a, b) => a.name.localeCompare(b.name))
+                      .map((model) => (
+                        <option key={model.id} value={model.id}>
+                          {model.name}{" "}
+                          {model.description ? ` - ${model.description}` : ""}
+                        </option>
+                      ))}
+                  </select>
+                </div>
+              </div>
+            </section>
+          )}
 
           {selectedModel && (
             <div className="settings__current-model">
@@ -206,33 +238,7 @@ const Settings: React.FC<SettingsProps> = () => {
           )}
         </section>
 
-        {/* Model Selection Section */}
-        {models.length > 0 && (
-          <section className="settings__section">
-            <h3 className="settings__section-title">Model Selection</h3>
-            <div className="settings__select-container">
-              <select
-                value={selectedModel}
-                onChange={(e) => {
-                  setSelectedModel(e.target.value)
-                  localStorage.setItem('selected_model', e.target.value);
-                  setMessage({ type: 'success', text: 'Model selection saved!' });
-                }}
-                className="settings__model-select"
-              >
-                <option value="">Select a model...</option>
-                {[...models]
-                  .sort((a, b) => a.name.localeCompare(b.name))
-                  .map((model) => (
-                    <option key={model.id} value={model.id}>
-                      {model.name}{" "}
-                      {model.description ? ` - ${model.description}` : ""}
-                    </option>
-                  ))}
-              </select>
-            </div>
-          </section>
-        )}
+
 
         {/* AI Settings Section */}
         <section className="settings__section">
@@ -265,17 +271,23 @@ const Settings: React.FC<SettingsProps> = () => {
               Default Tone:
             </label>
             <div className="settings__select-container">
-              <select
-                value={defaultTone}
-                onChange={(e) => setDefaultTone(e.target.value)}
-                className="settings__model-select"
-              >
-                {toneOptions.map(tone => (
-                  <option key={tone} value={tone}>
-                    {tone.charAt(0).toUpperCase() + tone.slice(1)}
-                  </option>
-                ))}
-              </select>
+              <div className="select-wrapper">
+                <select
+                  value={defaultTone}
+                  onChange={(e) => setDefaultTone(e.target.value)}
+                  className="settings__model-select"
+                  style={{
+                    backgroundColor: "#000",
+                    color: "inherit",
+                  }}
+                >
+                  {toneOptions.map(tone => (
+                    <option key={tone} value={tone}>
+                      {tone.charAt(0).toUpperCase() + tone.slice(1)}
+                    </option>
+                  ))}
+                </select>
+              </div>
             </div>
             <div className="settings__setting-description">
               For "Change Tone" action

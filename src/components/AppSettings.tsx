@@ -165,22 +165,24 @@ const AppSettings: React.FC = () => {
         <section className="app-settings__section">
           <h3 className="app-settings__section-title">Theme:</h3>
           <div className="app-settings__select-container">
-            <select
-              value={theme}
-              onChange={(e) => setTheme(e.target.value as 'NSX' | 'Aqua' | 'AquaDark' | 'Abelton' | 'Lamasass' | 'ICQ' | 'Ampwin' | 'Maverick')}
-              className="settings__model-select"
-            >
-              <option value="NSX">NSX</option>
-              <option value="Ampwin">Ampwin</option>
-              <option value="Aqua">Aqua</option>
-              <option value="AquaDark">Aqua Dark</option>
-              <option value="Abelton">Abelton</option>
-              <option value="ICQ">ICQ</option>
-              <option value="Lamasass">Lamasass</option>
-              <option value="Maverick">Maverick</option>
+            <div className="select-wrapper">
+              <select
+                value={theme}
+                onChange={(e) => setTheme(e.target.value as 'NSX' | 'Aqua' | 'AquaDark' | 'Abelton' | 'Lamasass' | 'ICQ' | 'Ampwin' | 'Maverick')}
+                className="settings__model-select"
+              >
+                <option value="NSX">NSX</option>
+                <option value="Ampwin">Ampwin</option>
+                <option value="Aqua">Aqua</option>
+                <option value="AquaDark">Aqua Dark</option>
+                <option value="Abelton">Abelton</option>
+                <option value="ICQ">ICQ</option>
+                <option value="Lamasass">Lamasass</option>
+                <option value="Maverick">Maverick</option>
 
-              {/* <option value="Console">Console</option> */}
-            </select>
+                {/* <option value="Console">Console</option> */}
+              </select>
+            </div>
           </div>
         </section>
       </div>
