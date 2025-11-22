@@ -5,23 +5,30 @@
 /* Base Typography & Layout */
 .theme-aquadark {
   /* Typography */
-  --font-family: 'Segoe UI', 'SF Pro Display', 'Helvetica Neue', Arial, sans-serif;
+  --font-family: 'Play', 'Segoe UI', 'SF Pro Display', 'Helvetica Neue', Arial, sans-serif;
   --font-size: 13px;
   --line-height: 1.4;
   --font-weight: 400;
 
   /* Base Colors */
-  --color: #F0F8FF;                    /* Light blue text */
-  --background-color: #0a0b13;         /* Very dark blue background */
-  --border-color: #30363D;             /* Medium gray borders */
+  --color: #F0F8FF;
+  /* Light blue text */
+  --background-color: #0a0b13;
+  /* Very dark blue background */
+  --border-color: #30363D;
+  /* Medium gray borders */
 
   /* Border Radius */
-  --button-border-radius1: 8px;        /* More rounded corners for modern look */
-  --button-border-radius2: 8px;        /* More rounded corners for inputs */
+  --button-border-radius1: 8px;
+  /* More rounded corners for modern look */
+  --button-border-radius2: 8px;
+  /* More rounded corners for inputs */
 
   /* Links */
-  --link-color: #00D4FF;               /* Bright cyan links */
-  --link-hover-color: #40E0FF;         /* Lighter cyan on hover */
+  --link-color: #00D4FF;
+  /* Bright cyan links */
+  --link-hover-color: #40E0FF;
+  /* Lighter cyan on hover */
 }
 
 /* ========================================
@@ -30,23 +37,35 @@
 
 .theme-aquadark {
   /* Drag Region */
-  --drag-region-border-bottom-color: #444C56;                    /* Light gray border */
-  --drag-region-background-color: linear-gradient(135deg, #21262D 0%, #30363D 100%);  /* Dark gradient */
+  --drag-region-border-bottom-color: #444C56;
+  /* Light gray border */
+  --drag-region-background-color: linear-gradient(135deg, #21262D 0%, #30363D 100%);
+  /* Dark gradient */
 
   /* Navigation Tabs */
-  --active-tab-background-color: linear-gradient(135deg, #00D4FF 0%, #00B4E6 50%, #0099CC 100%);  /* Bright cyan gradient */
-  --active-tab-color: #FFFFFF;                                      /* White text */
-  --active-tab-border-color: #40E0FF;                               /* Light cyan border */
+  --active-tab-background-color: linear-gradient(135deg, #00D4FF 0%, #00B4E6 50%, #0099CC 100%);
+  /* Bright cyan gradient */
+  --active-tab-color: #FFFFFF;
+  /* White text */
+  --active-tab-border-color: #40E0FF;
+  /* Light cyan border */
 
-  --inactive-tab-background-color: linear-gradient(135deg, #161B22 0%, #21262D 100%);  /* Dark gray gradient */
-  --inactive-tab-color: #F0F8FF;                                    /* Light blue text */
-  --inactive-tab-border-color: #30363D;                             /* Medium gray border */
+  --inactive-tab-background-color: linear-gradient(135deg, #161B22 0%, #21262D 100%);
+  /* Dark gray gradient */
+  --inactive-tab-color: #F0F8FF;
+  /* Light blue text */
+  --inactive-tab-border-color: #30363D;
+  /* Medium gray border */
 
   /* Tab Interactions */
-  --tab-hover-background-color: linear-gradient(135deg, #21262D 0%, #30363D 50%, #444C56 100%);  /* Lighter dark gray */
-  --tab-hover-border-color: #00D4FF;                                /* Bright cyan border */
-  --tab-active-background-color: linear-gradient(135deg, #40E0FF 0%, #00D4FF 100%);  /* Cyan gradient */
-  --tab-active-border-color: #00B4E6;                               /* Medium cyan border */
+  --tab-hover-background-color: linear-gradient(135deg, #21262D 0%, #30363D 50%, #444C56 100%);
+  /* Lighter dark gray */
+  --tab-hover-border-color: #00D4FF;
+  /* Bright cyan border */
+  --tab-active-background-color: linear-gradient(135deg, #40E0FF 0%, #00D4FF 100%);
+  /* Cyan gradient */
+  --tab-active-border-color: #00B4E6;
+  /* Medium cyan border */
 }
 
 /* ========================================
@@ -55,63 +74,109 @@
 
 .theme-aquadark {
   /* Button Base */
-  --button-hover-border-color: #555555;                              /* Medium gray hover border */
-  --button-hover-background-color: linear-gradient(135deg, #00D4FF 0%, #00B4E6 50%, #0099CC 100%);  /* Cyan hover gradient */
-  --button-active-border-color: #333333;                             /* Dark gray active border */
-  --button-active-background-color: linear-gradient(135deg, #0099CC 0%, #0080B3 50%, #006699 100%); /* Darker cyan active */
+  --button-hover-border-color: #555555;
+  /* Medium gray hover border */
+  --button-hover-background-color: linear-gradient(135deg, #00D4FF 0%, #00B4E6 50%, #0099CC 100%);
+  /* Cyan hover gradient */
+  --button-active-border-color: #333333;
+  /* Dark gray active border */
+  --button-active-background-color: linear-gradient(135deg, #0099CC 0%, #0080B3 50%, #006699 100%);
+  /* Darker cyan active */
 
   /* Action Buttons (Proofread, Tone, Draft) */
-  --action-button-background-color: linear-gradient(135deg, #161B22 0%, #21262D 50%, #30363D 100%);  /* Dark gradient */
-  --action-button-color: #F0F8FF;                                       /* Light blue text */
-  --action-button-border-color: #30363D;                                /* Medium gray border */
-  --action-button-active-background-color: linear-gradient(135deg, #0099CC 0%, #0080B3 50%, #006699 100%);  /* Dark cyan active */
-  --action-button-active-color: #FFFFFF;                               /* White text when active */
-  --action-button-active-border-color: #00B4E6;                        /* Medium cyan border when active */
-  --action-button-hover-background-color: linear-gradient(135deg, #00D4FF 0%, #00B4E6 50%, #0099CC 100%);  /* Cyan hover */
-  --action-button-hover-border-color: #40E0FF;                          /* Light cyan hover border */
+  --action-button-background-color: linear-gradient(135deg, #161B22 0%, #21262D 50%, #30363D 100%);
+  /* Dark gradient */
+  --action-button-color: #F0F8FF;
+  /* Light blue text */
+  --action-button-border-color: #30363D;
+  /* Medium gray border */
+  --action-button-active-background-color: linear-gradient(135deg, #0099CC 0%, #0080B3 50%, #006699 100%);
+  /* Dark cyan active */
+  --action-button-active-color: #FFFFFF;
+  /* White text when active */
+  --action-button-active-border-color: #00B4E6;
+  /* Medium cyan border when active */
+  --action-button-hover-background-color: linear-gradient(135deg, #00D4FF 0%, #00B4E6 50%, #0099CC 100%);
+  /* Cyan hover */
+  --action-button-hover-border-color: #40E0FF;
+  /* Light cyan hover border */
 
   /* Send Button */
-  --send-button-background-color: linear-gradient(135deg, #161B22 0%, #21262D 50%, #30363D 100%);  /* Dark gradient */
-  --send-button-color: #F0F8FF;                                         /* Light blue text */
-  --send-button-border-color: #30363D;                                  /* Medium gray border */
-  --send-button-hover-background-color: linear-gradient(135deg, #00D4FF 0%, #00B4E6 50%, #0099CC 100%);  /* Cyan hover */
-  --send-button-hover-border-color: #40E0FF;                            /* Light cyan hover border */
-  --send-button-active-background-color: linear-gradient(135deg, #0099CC 0%, #0080B3 50%, #006699 100%);  /* Dark cyan active */
-  --send-button-active-border-color: #00B4E6;                           /* Medium cyan active border */
+  --send-button-background-color: linear-gradient(135deg, #161B22 0%, #21262D 50%, #30363D 100%);
+  /* Dark gradient */
+  --send-button-color: #F0F8FF;
+  /* Light blue text */
+  --send-button-border-color: #30363D;
+  /* Medium gray border */
+  --send-button-hover-background-color: linear-gradient(135deg, #00D4FF 0%, #00B4E6 50%, #0099CC 100%);
+  /* Cyan hover */
+  --send-button-hover-border-color: #40E0FF;
+  /* Light cyan hover border */
+  --send-button-active-background-color: linear-gradient(135deg, #0099CC 0%, #0080B3 50%, #006699 100%);
+  /* Dark cyan active */
+  --send-button-active-border-color: #00B4E6;
+  /* Medium cyan active border */
 
   /* Copy Button */
-  --copy-button-background-color: linear-gradient(135deg, #161B22 0%, #21262D 50%, #30363D 100%);  /* Dark gradient */
-  --copy-button-color: #F0F8FF;                                         /* Light blue text */
-  --copy-button-border-color: #30363D;                                  /* Medium gray border */
-  --copy-button-copied-background-color: linear-gradient(135deg, #00D4FF 0%, #00B4E6 50%, #0099CC 100%);  /* Cyan when copied */
-  --copy-button-copied-color: #FFFFFF;                                  /* White text when copied */
-  --copy-button-copied-border-color: #40E0FF;                           /* Light cyan border when copied */
-  --copy-button-hover-background-color: linear-gradient(135deg, #00D4FF 0%, #00B4E6 50%, #0099CC 100%);  /* Cyan hover */
-  --copy-button-hover-border-color: #40E0FF;                            /* Light cyan hover border */
-  --copy-button-active-background-color: linear-gradient(135deg, #0099CC 0%, #0080B3 50%, #006699 100%);  /* Dark cyan active */
-  --copy-button-active-border-color: #00B4E6;                           /* Medium cyan active border */
+  --copy-button-background-color: linear-gradient(135deg, #161B22 0%, #21262D 50%, #30363D 100%);
+  /* Dark gradient */
+  --copy-button-color: #F0F8FF;
+  /* Light blue text */
+  --copy-button-border-color: #30363D;
+  /* Medium gray border */
+  --copy-button-copied-background-color: linear-gradient(135deg, #00D4FF 0%, #00B4E6 50%, #0099CC 100%);
+  /* Cyan when copied */
+  --copy-button-copied-color: #FFFFFF;
+  /* White text when copied */
+  --copy-button-copied-border-color: #40E0FF;
+  /* Light cyan border when copied */
+  --copy-button-hover-background-color: linear-gradient(135deg, #00D4FF 0%, #00B4E6 50%, #0099CC 100%);
+  /* Cyan hover */
+  --copy-button-hover-border-color: #40E0FF;
+  /* Light cyan hover border */
+  --copy-button-active-background-color: linear-gradient(135deg, #0099CC 0%, #0080B3 50%, #006699 100%);
+  /* Dark cyan active */
+  --copy-button-active-border-color: #00B4E6;
+  /* Medium cyan active border */
 
   /* Settings Buttons */
-  --save-key-button-background-color: linear-gradient(135deg, #161B22 0%, #21262D 50%, #30363D 100%);  /* Dark gradient */
-  --save-key-button-color: #F0F8FF;                                     /* Light blue text */
-  --save-key-button-border-color: #30363D;                              /* Medium gray border */
-  --save-key-button-hover-border-color: #40E0FF;                        /* Light cyan hover border */
-  --save-key-button-active-background-color: linear-gradient(135deg, #0099CC 0%, #0080B3 50%, #006699 100%);  /* Dark cyan active */
-  --save-key-button-active-border-color: #00B4E6;                       /* Medium cyan active border */
+  --save-key-button-background-color: linear-gradient(135deg, #161B22 0%, #21262D 50%, #30363D 100%);
+  /* Dark gradient */
+  --save-key-button-color: #F0F8FF;
+  /* Light blue text */
+  --save-key-button-border-color: #30363D;
+  /* Medium gray border */
+  --save-key-button-hover-border-color: #40E0FF;
+  /* Light cyan hover border */
+  --save-key-button-active-background-color: linear-gradient(135deg, #0099CC 0%, #0080B3 50%, #006699 100%);
+  /* Dark cyan active */
+  --save-key-button-active-border-color: #00B4E6;
+  /* Medium cyan active border */
 
-  --load-models-button-background-color: linear-gradient(135deg, #161B22 0%, #21262D 50%, #30363D 100%);  /* Dark gradient */
-  --load-models-button-color: #F0F8FF;                                  /* Light blue text */
-  --load-models-button-border-color: #30363D;                           /* Medium gray border */
-  --load-models-button-hover-background-color: linear-gradient(135deg, #00D4FF 0%, #00B4E6 50%, #0099CC 100%);  /* Cyan hover */
-  --load-models-button-hover-border-color: #40E0FF;                     /* Light cyan hover border */
-  --load-models-button-active-background-color: linear-gradient(135deg, #0099CC 0%, #0080B3 50%, #006699 100%);  /* Dark cyan active */
-  --load-models-button-active-border-color: #00B4E6;                    /* Medium cyan active border */
-  --load-models-button-disabled-background-color: #1A1A1A;              /* Very dark disabled */
-  --load-models-button-disabled-color: #555555;                         /* Medium gray disabled text */
-  --load-models-button-disabled-border-color: #333333;                  /* Dark gray disabled border */
+  --load-models-button-background-color: linear-gradient(135deg, #161B22 0%, #21262D 50%, #30363D 100%);
+  /* Dark gradient */
+  --load-models-button-color: #F0F8FF;
+  /* Light blue text */
+  --load-models-button-border-color: #30363D;
+  /* Medium gray border */
+  --load-models-button-hover-background-color: linear-gradient(135deg, #00D4FF 0%, #00B4E6 50%, #0099CC 100%);
+  /* Cyan hover */
+  --load-models-button-hover-border-color: #40E0FF;
+  /* Light cyan hover border */
+  --load-models-button-active-background-color: linear-gradient(135deg, #0099CC 0%, #0080B3 50%, #006699 100%);
+  /* Dark cyan active */
+  --load-models-button-active-border-color: #00B4E6;
+  /* Medium cyan active border */
+  --load-models-button-disabled-background-color: #1A1A1A;
+  /* Very dark disabled */
+  --load-models-button-disabled-color: #555555;
+  /* Medium gray disabled text */
+  --load-models-button-disabled-border-color: #333333;
+  /* Dark gray disabled border */
 
   /* Icons */
-  --button-icon-color: #F0F8FF;  /* Light blue icons */
+  --button-icon-color: #F0F8FF;
+  /* Light blue icons */
 }
 
 /* ========================================
@@ -120,27 +185,42 @@
 
 .theme-aquadark {
   /* Tone Selection */
-  --tone-select-background-color: linear-gradient(135deg, #0D1117 0%, #161B22 100%);  /* Dark gradient */
-  --tone-select-color: #F0F8FF;                         /* Light blue text */
-  --tone-select-border-color: #30363D;                  /* Medium gray border */
+  --tone-select-background-color: linear-gradient(135deg, #0D1117 0%, #161B22 100%);
+  /* Dark gradient */
+  --tone-select-color: #F0F8FF;
+  /* Light blue text */
+  --tone-select-border-color: #30363D;
+  /* Medium gray border */
 
   /* Text Inputs & Textareas */
-  --text-input-background-color: linear-gradient(135deg, #0D1117 0%, #161B22 100%);  /* Dark gradient */
-  --text-input-color: #F0F8FF;                              /* Light blue text */
-  --text-input-border-color: #30363D;                       /* Medium gray border */
-  --text-output-background-color: linear-gradient(135deg, #0D1117 0%, #161B22 100%); /* Dark gradient */
-  --text-output-color: #F0F8FF;                             /* Light blue text */
-  --text-output-border-color: #30363D;                      /* Medium gray border */
+  --text-input-background-color: linear-gradient(135deg, #0D1117 0%, #161B22 100%);
+  /* Dark gradient */
+  --text-input-color: #F0F8FF;
+  /* Light blue text */
+  --text-input-border-color: #30363D;
+  /* Medium gray border */
+  --text-output-background-color: linear-gradient(135deg, #0D1117 0%, #161B22 100%);
+  /* Dark gradient */
+  --text-output-color: #F0F8FF;
+  /* Light blue text */
+  --text-output-border-color: #30363D;
+  /* Medium gray border */
 
   /* API Key Input */
-  --api-key-input-background-color: linear-gradient(135deg, #0D1117 0%, #161B22 100%);  /* Dark gradient */
-  --api-key-input-color: #F0F8FF;                               /* Light blue text */
-  --api-key-input-border-color: #30363D;                        /* Medium gray border */
+  --api-key-input-background-color: linear-gradient(135deg, #0D1117 0%, #161B22 100%);
+  /* Dark gradient */
+  --api-key-input-color: #F0F8FF;
+  /* Light blue text */
+  --api-key-input-border-color: #30363D;
+  /* Medium gray border */
 
   /* Model Selection */
-  --model-select-background-color: linear-gradient(135deg, #0D1117 0%, #161B22 100%);  /* Dark gradient */
-  --model-select-color: #F0F8FF;                                /* Light blue text */
-  --model-select-border-color: #30363D;                         /* Medium gray border */
+  --model-select-background-color: linear-gradient(135deg, #0D1117 0%, #161B22 100%);
+  /* Dark gradient */
+  --model-select-color: #F0F8FF;
+  /* Light blue text */
+  --model-select-border-color: #30363D;
+  /* Medium gray border */
 }
 
 /* ========================================
@@ -149,14 +229,20 @@
 
 .theme-aquadark {
   /* Labels */
-  --input-label-color: #F0F8FF;   /* Light blue labels */
-  --output-label-color: #F0F8FF;  /* Light blue labels */
-  --section-title-color: #F0F8FF; /* Light blue section titles */
+  --input-label-color: #F0F8FF;
+  /* Light blue labels */
+  --output-label-color: #F0F8FF;
+  /* Light blue labels */
+  --section-title-color: #F0F8FF;
+  /* Light blue section titles */
 
   /* Descriptions */
-  --api-key-description-color: #C9D1D9;  /* Light gray description text */
-  --api-key-link-color: #00D4FF;         /* Bright cyan links */
-  --api-key-link-hover-color: #40E0FF;   /* Lighter cyan hover links */
+  --api-key-description-color: #C9D1D9;
+  /* Light gray description text */
+  --api-key-link-color: #00D4FF;
+  /* Bright cyan links */
+  --api-key-link-hover-color: #40E0FF;
+  /* Lighter cyan hover links */
 }
 
 /* ========================================
@@ -165,17 +251,24 @@
 
 .theme-aquadark {
   /* Overlay Container */
-  --overlay-container-background-color: linear-gradient(135deg, rgba(13,17,23,0.95) 0%, rgba(22,27,34,0.95) 100%);  /* Semi-transparent dark gradient */
-  --overlay-container-border-color: #30363D;  /* Medium gray border */
+  --overlay-container-background-color: linear-gradient(135deg, rgba(13, 17, 23, 0.95) 0%, rgba(22, 27, 34, 0.95) 100%);
+  /* Semi-transparent dark gradient */
+  --overlay-container-border-color: #30363D;
+  /* Medium gray border */
 
   /* Settings Container */
-  --settings-container-background-color: linear-gradient(135deg, rgba(13,17,23,0.95) 0%, rgba(22,27,34,0.95) 100%);  /* Semi-transparent dark gradient */
-  --settings-container-border-color: #30363D;  /* Medium gray border */
+  --settings-container-background-color: linear-gradient(135deg, rgba(13, 17, 23, 0.95) 0%, rgba(22, 27, 34, 0.95) 100%);
+  /* Semi-transparent dark gradient */
+  --settings-container-border-color: #30363D;
+  /* Medium gray border */
 
   /* Current Settings Display */
-  --current-settings-display-background-color: linear-gradient(135deg, #0D1117 0%, #161B22 100%);  /* Dark gradient */
-  --current-settings-display-border-color: #30363D;  /* Medium gray border */
-  --current-settings-display-color: #F0F8FF;          /* Light blue text */
+  --current-settings-display-background-color: linear-gradient(135deg, #0D1117 0%, #161B22 100%);
+  /* Dark gradient */
+  --current-settings-display-border-color: #30363D;
+  /* Medium gray border */
+  --current-settings-display-color: #F0F8FF;
+  /* Light blue text */
 }
 
 /* ========================================
@@ -184,22 +277,34 @@
 
 .theme-aquadark {
   /* Loading Indicator */
-  --loading-indicator-background-color: linear-gradient(135deg, rgba(13,17,23,0.95) 0%, rgba(22,27,34,0.95) 100%);  /* Semi-transparent dark gradient */
-  --loading-indicator-border-color: #30363D;  /* Medium gray border */
-  --spinner-color: #00D4FF;                    /* Bright cyan spinner */
-  --loading-text-color: #F0F8FF;               /* Light blue loading text */
+  --loading-indicator-background-color: linear-gradient(135deg, rgba(13, 17, 23, 0.95) 0%, rgba(22, 27, 34, 0.95) 100%);
+  /* Semi-transparent dark gradient */
+  --loading-indicator-border-color: #30363D;
+  /* Medium gray border */
+  --spinner-color: #00D4FF;
+  /* Bright cyan spinner */
+  --loading-text-color: #F0F8FF;
+  /* Light blue loading text */
 
   /* Message Displays */
-  --message-display-success-background-color: linear-gradient(135deg, #1A4F1A 0%, #0F3F0F 100%);  /* Dark green success background */
-  --message-display-success-color: #4ADE80;                         /* Light green success text */
-  --message-display-success-border-color: #166534;                  /* Dark green success border */
-  --message-display-error-background-color: linear-gradient(135deg, #4F1A1A 0%, #3F0F0F 100%);  /* Dark red error background */
-  --message-display-error-color: #F87171;                           /* Light red error text */
-  --message-display-error-border-color: #7F1D1D;                    /* Dark red error border */
+  --message-display-success-background-color: linear-gradient(135deg, #1A4F1A 0%, #0F3F0F 100%);
+  /* Dark green success background */
+  --message-display-success-color: #4ADE80;
+  /* Light green success text */
+  --message-display-success-border-color: #166534;
+  /* Dark green success border */
+  --message-display-error-background-color: linear-gradient(135deg, #4F1A1A 0%, #3F0F0F 100%);
+  /* Dark red error background */
+  --message-display-error-color: #F87171;
+  /* Light red error text */
+  --message-display-error-border-color: #7F1D1D;
+  /* Dark red error border */
 
   /* Message Icons */
-  --message-icon-success-color: #4ADE80;  /* Light green success icon */
-  --message-icon-error-color: #F87171;    /* Light red error icon */
+  --message-icon-success-color: #4ADE80;
+  /* Light green success icon */
+  --message-icon-error-color: #F87171;
+  /* Light red error icon */
 }
 
 /* ========================================
@@ -208,25 +313,38 @@
 
 .theme-aquadark {
   /* Scrollbar Track */
-  --scrollbar-track-background-color: linear-gradient(135deg, #0D1117 0%, #161B22 100%);  /* Dark track gradient */
-  --scrollbar-track-border-color: #21262D;  /* Dark gray track border */
+  --scrollbar-track-background-color: linear-gradient(135deg, #0D1117 0%, #161B22 100%);
+  /* Dark track gradient */
+  --scrollbar-track-border-color: #21262D;
+  /* Dark gray track border */
 
   /* Scrollbar Thumb */
-  --scrollbar-thumb-background-color: linear-gradient(135deg, #21262D 0%, #30363D 50%, #444C56 100%);  /* Gray thumb gradient */
-  --scrollbar-thumb-border-color: #555C66;  /* Light gray thumb border */
-  --scrollbar-thumb-hover-background-color: linear-gradient(135deg, #00D4FF 0%, #00B4E6 50%, #0099CC 100%);  /* Cyan hover */
-  --scrollbar-thumb-hover-border-color: #40E0FF;  /* Light cyan hover border */
-  --scrollbar-thumb-active-background-color: linear-gradient(135deg, #0099CC 0%, #0080B3 50%, #006699 100%);  /* Dark cyan active */
-  --scrollbar-thumb-active-border-color: #00B4E6;  /* Medium cyan active border */
+  --scrollbar-thumb-background-color: linear-gradient(135deg, #21262D 0%, #30363D 50%, #444C56 100%);
+  /* Gray thumb gradient */
+  --scrollbar-thumb-border-color: #555C66;
+  /* Light gray thumb border */
+  --scrollbar-thumb-hover-background-color: linear-gradient(135deg, #00D4FF 0%, #00B4E6 50%, #0099CC 100%);
+  /* Cyan hover */
+  --scrollbar-thumb-hover-border-color: #40E0FF;
+  /* Light cyan hover border */
+  --scrollbar-thumb-active-background-color: linear-gradient(135deg, #0099CC 0%, #0080B3 50%, #006699 100%);
+  /* Dark cyan active */
+  --scrollbar-thumb-active-border-color: #00B4E6;
+  /* Medium cyan active border */
 
   /* Scrollbar Corner & Buttons */
-  --scrollbar-corner-background-color: linear-gradient(135deg, #0D1117 0%, #161B22 100%);  /* Dark corner */
-  --scrollbar-corner-border-color: #21262D;  /* Dark gray corner border */
-  --scrollbar-button-background-color: linear-gradient(135deg, #161B22 0%, #21262D 50%, #30363D 100%);  /* Dark button */
-  --scrollbar-button-border-color: #30363D;  /* Medium gray button border */
+  --scrollbar-corner-background-color: linear-gradient(135deg, #0D1117 0%, #161B22 100%);
+  /* Dark corner */
+  --scrollbar-corner-border-color: #21262D;
+  /* Dark gray corner border */
+  --scrollbar-button-background-color: linear-gradient(135deg, #161B22 0%, #21262D 50%, #30363D 100%);
+  /* Dark button */
+  --scrollbar-button-border-color: #30363D;
+  /* Medium gray button border */
 
   /* Firefox Scrollbar */
-  --scrollbar-color: linear-gradient(135deg, #21262D 0%, #30363D 50%, #444C56 100%) linear-gradient(135deg, #0D1117 0%, #161B22 100%);  /* Gray thumb, dark track */
+  --scrollbar-color: linear-gradient(135deg, #21262D 0%, #30363D 50%, #444C56 100%) linear-gradient(135deg, #0D1117 0%, #161B22 100%);
+  /* Gray thumb, dark track */
 }
 
 /* ========================================
@@ -235,10 +353,16 @@
 
 .theme-aquadark {
   /* Select Dropdown Options */
-  --select-option-background-color: #161B22;                         /* Dark option background */
-  --select-option-color: #F0F8FF;                                    /* Light blue option text */
-  --select-option-hover-background-color: linear-gradient(135deg, #21262D 0%, #30363D 50%, #444C56 100%);  /* Dark gray hover */
-  --select-option-hover-color: #F0F8FF;                              /* Light blue hover text */
-  --select-option-checked-background-color: linear-gradient(135deg, #00D4FF 0%, #00B4E6 50%, #0099CC 100%);  /* Cyan checked */
-  --select-option-checked-color: #FFFFFF;                            /* White checked text */
+  --select-option-background-color: #161B22;
+  /* Dark option background */
+  --select-option-color: #F0F8FF;
+  /* Light blue option text */
+  --select-option-hover-background-color: linear-gradient(135deg, #21262D 0%, #30363D 50%, #444C56 100%);
+  /* Dark gray hover */
+  --select-option-hover-color: #F0F8FF;
+  /* Light blue hover text */
+  --select-option-checked-background-color: linear-gradient(135deg, #00D4FF 0%, #00B4E6 50%, #0099CC 100%);
+  /* Cyan checked */
+  --select-option-checked-color: #FFFFFF;
+  /* White checked text */
 }

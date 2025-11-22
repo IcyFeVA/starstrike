@@ -3,7 +3,7 @@ import { invoke } from '@tauri-apps/api/core';
 import { getCurrentWindow } from '@tauri-apps/api/window';
 import { Edit3, MessageSquare, PenTool, Loader2, Copy, Check } from 'lucide-react';
 
-interface OverlayProps {}
+interface OverlayProps { }
 
 const Overlay: React.FC<OverlayProps> = () => {
   const [inputText, setInputText] = useState('');
@@ -38,7 +38,7 @@ const Overlay: React.FC<OverlayProps> = () => {
       // and the current action is 'proofread'
       if (selectedAction === 'proofread' && sendButtonRef.current) {
         sendButtonRef.current.focus();
-      }      
+      }
     };
 
     window.addEventListener('focus', handleFocus);
@@ -202,7 +202,7 @@ const Overlay: React.FC<OverlayProps> = () => {
             <select
               value={selectedTone}
               onChange={(e) => setSelectedTone(e.target.value)}
-              className="tone-selection__select"
+              className="settings__model-select"
             >
               {toneOptions.map(tone => (
                 <option key={tone} value={tone}>
@@ -240,24 +240,24 @@ const Overlay: React.FC<OverlayProps> = () => {
         {outputText && !(
           autoCloseEnabled || selectedAction === 'proofread'
         ) && (
-          <div className="output-section">
-            <div className="output-section__header">
-              <label className="output-section__label">Output:</label>
-              <button
-                onClick={copyToClipboard}
-                className={`copy-button ${copied ? 'copy-button--copied' : ''}`}
-              >
-                {copied ? <Check size={12} className="copy-button__icon" /> : <Copy size={12} className="copy-button__icon" />}
-                {copied ? 'Copied!' : 'Copy'}
-              </button>
+            <div className="output-section">
+              <div className="output-section__header">
+                <label className="output-section__label">Output:</label>
+                <button
+                  onClick={copyToClipboard}
+                  className={`copy-button ${copied ? 'copy-button--copied' : ''}`}
+                >
+                  {copied ? <Check size={12} className="copy-button__icon" /> : <Copy size={12} className="copy-button__icon" />}
+                  {copied ? 'Copied!' : 'Copy'}
+                </button>
+              </div>
+              <textarea
+                value={outputText}
+                readOnly
+                className="output-section__textarea"
+              />
             </div>
-            <textarea
-              value={outputText}
-              readOnly
-              className="output-section__textarea"
-            />
-          </div>
-        )}
+          )}
 
         {isLoading && (
           <div className="loading-indicator">

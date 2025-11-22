@@ -276,10 +276,6 @@ const Settings: React.FC<SettingsProps> = () => {
                   value={defaultTone}
                   onChange={(e) => setDefaultTone(e.target.value)}
                   className="settings__model-select"
-                  style={{
-                    backgroundColor: "#000",
-                    color: "inherit",
-                  }}
                 >
                   {toneOptions.map(tone => (
                     <option key={tone} value={tone}>

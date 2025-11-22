@@ -5,23 +5,30 @@
 /* Base Typography & Layout */
 .theme-nsx {
   /* Typography */
-  --font-family: monospace, 'Courier New', 'Consolas', 'Monaco';
+  --font-family: 'Play', monospace, 'Courier New', 'Consolas', 'Monaco';
   --font-size: 11px;
   --line-height: 16px;
   --font-weight: 400;
 
   /* Base Colors */
-  --color: #00ffff;                    /* Primary cyan text */
-  --background-color: #000000;         /* Pure black background */
-  --border-color: #00ffff;             /* Cyan borders */
+  --color: #00ffff;
+  /* Primary cyan text */
+  --background-color: #000000;
+  /* Pure black background */
+  --border-color: #00ffff;
+  /* Cyan borders */
 
   /* Border Radius */
-  --button-border-radius1: 0;          /* Sharp corners for buttons */
-  --button-border-radius2: 0;          /* Sharp corners for inputs */
+  --button-border-radius1: 0;
+  /* Sharp corners for buttons */
+  --button-border-radius2: 0;
+  /* Sharp corners for inputs */
 
   /* Links */
-  --link-color: #007AFF;               /* Blue links */
-  --link-hover-color: #0056CC;         /* Darker blue on hover */
+  --link-color: #007AFF;
+  /* Blue links */
+  --link-hover-color: #0056CC;
+  /* Darker blue on hover */
 }
 
 /* ========================================
@@ -30,23 +37,35 @@
 
 .theme-nsx {
   /* Drag Region */
-  --drag-region-border-bottom-color: #00ffff3b;  /* Semi-transparent cyan */
-  --drag-region-background-color: #000000;       /* Black background */
+  --drag-region-border-bottom-color: #00ffff3b;
+  /* Semi-transparent cyan */
+  --drag-region-background-color: #000000;
+  /* Black background */
 
   /* Navigation Tabs */
-  --active-tab-background-color: rgb(50, 1, 185);    /* Purple active tab */
-  --active-tab-color: #00ffff;                       /* Cyan text */
-  --active-tab-border-color: #000000;                /* Black border */
+  --active-tab-background-color: rgb(50, 1, 185);
+  /* Purple active tab */
+  --active-tab-color: #00ffff;
+  /* Cyan text */
+  --active-tab-border-color: #000000;
+  /* Black border */
 
-  --inactive-tab-background-color: rgba(0, 255, 255, 0.158);  /* Semi-transparent cyan */
-  --inactive-tab-color: #00ffff;                              /* Cyan text */
-  --inactive-tab-border-color: #000000;                       /* Black border */
+  --inactive-tab-background-color: rgba(0, 255, 255, 0.158);
+  /* Semi-transparent cyan */
+  --inactive-tab-color: #00ffff;
+  /* Cyan text */
+  --inactive-tab-border-color: #000000;
+  /* Black border */
 
   /* Tab Interactions */
-  --tab-hover-background-color: rgba(0, 255, 255, 0.301);     /* More opaque cyan */
-  --tab-hover-border-color: rgb(0, 0, 0);                     /* Black border */
-  --tab-active-background-color: rgba(255, 102, 0, 0.2);     /* Orange active state */
-  --tab-active-border-color: #ff6600;                         /* Orange border */
+  --tab-hover-background-color: rgba(0, 255, 255, 0.301);
+  /* More opaque cyan */
+  --tab-hover-border-color: rgb(0, 0, 0);
+  /* Black border */
+  --tab-active-background-color: rgba(255, 102, 0, 0.2);
+  /* Orange active state */
+  --tab-active-border-color: #ff6600;
+  /* Orange border */
 }
 
 /* ========================================
@@ -55,63 +74,109 @@
 
 .theme-nsx {
   /* Button Base */
-  --button-hover-border-color: #ff6600;               /* Orange hover border */
-  --button-hover-background-color: rgba(0, 255, 255, 0.1);  /* Cyan hover background */
-  --button-active-border-color: #ff6600;                     /* Orange active border */
-  --button-active-background-color: rgba(255, 102, 0, 0.2); /* Orange active background */
+  --button-hover-border-color: #ff6600;
+  /* Orange hover border */
+  --button-hover-background-color: rgba(0, 255, 255, 0.1);
+  /* Cyan hover background */
+  --button-active-border-color: #ff6600;
+  /* Orange active border */
+  --button-active-background-color: rgba(255, 102, 0, 0.2);
+  /* Orange active background */
 
   /* Action Buttons (Proofread, Tone, Draft) */
-  --action-button-background-color: black;                    /* Black background */
-  --action-button-color: #00ffff;                            /* Cyan text */
-  --action-button-border-color: #00ffff;                     /* Cyan border */
-  --action-button-active-background-color: rgb(0, 255, 255); /* Full cyan when active */
-  --action-button-active-color: #000505;                     /* Dark text when active */
-  --action-button-active-border-color: #00ffff;              /* Cyan border when active */
-  --action-button-hover-background-color: inherit;           /* Inherit background */
-  --action-button-hover-border-color: #ff6600;               /* Orange hover border */
+  --action-button-background-color: black;
+  /* Black background */
+  --action-button-color: #00ffff;
+  /* Cyan text */
+  --action-button-border-color: #00ffff;
+  /* Cyan border */
+  --action-button-active-background-color: rgb(0, 255, 255);
+  /* Full cyan when active */
+  --action-button-active-color: #000505;
+  /* Dark text when active */
+  --action-button-active-border-color: #00ffff;
+  /* Cyan border when active */
+  --action-button-hover-background-color: inherit;
+  /* Inherit background */
+  --action-button-hover-border-color: #ff6600;
+  /* Orange hover border */
 
   /* Send Button */
-  --send-button-background-color: black;                     /* Black background */
-  --send-button-color: #00ffff;                              /* Cyan text */
-  --send-button-border-color: #00ffff;                       /* Cyan border */
-  --send-button-hover-background-color: rgba(0, 255, 255, 0.1);  /* Cyan hover */
-  --send-button-hover-border-color: #ff6600;                     /* Orange hover border */
-  --send-button-active-background-color: rgba(255, 102, 0, 0.2); /* Orange active */
-  --send-button-active-border-color: #ff6600;                    /* Orange active border */
+  --send-button-background-color: black;
+  /* Black background */
+  --send-button-color: #00ffff;
+  /* Cyan text */
+  --send-button-border-color: #00ffff;
+  /* Cyan border */
+  --send-button-hover-background-color: rgba(0, 255, 255, 0.1);
+  /* Cyan hover */
+  --send-button-hover-border-color: #ff6600;
+  /* Orange hover border */
+  --send-button-active-background-color: rgba(255, 102, 0, 0.2);
+  /* Orange active */
+  --send-button-active-border-color: #ff6600;
+  /* Orange active border */
 
   /* Copy Button */
-  --copy-button-background-color: transparent;                   /* Transparent background */
-  --copy-button-color: #00ffff;                                  /* Cyan text */
-  --copy-button-border-color: #00ffff;                           /* Cyan border */
-  --copy-button-copied-background-color: rgba(0, 255, 255, 0.2); /* Cyan when copied */
-  --copy-button-copied-color: #00ffff;                           /* Cyan text when copied */
-  --copy-button-copied-border-color: #00ffff;                    /* Cyan border when copied */
-  --copy-button-hover-background-color: rgba(0, 255, 255, 0.1);  /* Cyan hover */
-  --copy-button-hover-border-color: #ff6600;                     /* Orange hover border */
-  --copy-button-active-background-color: rgba(255, 102, 0, 0.2); /* Orange active */
-  --copy-button-active-border-color: #ff6600;                    /* Orange active border */
+  --copy-button-background-color: transparent;
+  /* Transparent background */
+  --copy-button-color: #00ffff;
+  /* Cyan text */
+  --copy-button-border-color: #00ffff;
+  /* Cyan border */
+  --copy-button-copied-background-color: rgba(0, 255, 255, 0.2);
+  /* Cyan when copied */
+  --copy-button-copied-color: #00ffff;
+  /* Cyan text when copied */
+  --copy-button-copied-border-color: #00ffff;
+  /* Cyan border when copied */
+  --copy-button-hover-background-color: rgba(0, 255, 255, 0.1);
+  /* Cyan hover */
+  --copy-button-hover-border-color: #ff6600;
+  /* Orange hover border */
+  --copy-button-active-background-color: rgba(255, 102, 0, 0.2);
+  /* Orange active */
+  --copy-button-active-border-color: #ff6600;
+  /* Orange active border */
 
   /* Settings Buttons */
-  --save-key-button-background-color: black;                     /* Black background */
-  --save-key-button-color: #00ffff;                              /* Cyan text */
-  --save-key-button-border-color: #00ffff;                       /* Cyan border */
-  --save-key-button-hover-border-color: #ff6600;                 /* Orange hover border */
-  --save-key-button-active-background-color: rgba(255, 102, 0, 0.2); /* Orange active */
-  --save-key-button-active-border-color: #ff6600;                /* Orange active border */
+  --save-key-button-background-color: black;
+  /* Black background */
+  --save-key-button-color: #00ffff;
+  /* Cyan text */
+  --save-key-button-border-color: #00ffff;
+  /* Cyan border */
+  --save-key-button-hover-border-color: #ff6600;
+  /* Orange hover border */
+  --save-key-button-active-background-color: rgba(255, 102, 0, 0.2);
+  /* Orange active */
+  --save-key-button-active-border-color: #ff6600;
+  /* Orange active border */
 
-  --load-models-button-background-color: transparent;                /* Transparent background */
-  --load-models-button-color: #00ffff;                               /* Cyan text */
-  --load-models-button-border-color: #00ffff;                        /* Cyan border */
-  --load-models-button-hover-background-color: rgba(0, 255, 255, 0.1); /* Cyan hover */
-  --load-models-button-hover-border-color: #ff6600;                  /* Orange hover border */
-  --load-models-button-active-background-color: rgba(255, 102, 0, 0.2); /* Orange active */
-  --load-models-button-active-border-color: #ff6600;                 /* Orange active border */
-  --load-models-button-disabled-background-color: rgba(128, 128, 128, 0.2); /* Gray disabled */
-  --load-models-button-disabled-color: #666666;                          /* Gray disabled text */
-  --load-models-button-disabled-border-color: #666666;                   /* Gray disabled border */
+  --load-models-button-background-color: transparent;
+  /* Transparent background */
+  --load-models-button-color: #00ffff;
+  /* Cyan text */
+  --load-models-button-border-color: #00ffff;
+  /* Cyan border */
+  --load-models-button-hover-background-color: rgba(0, 255, 255, 0.1);
+  /* Cyan hover */
+  --load-models-button-hover-border-color: #ff6600;
+  /* Orange hover border */
+  --load-models-button-active-background-color: rgba(255, 102, 0, 0.2);
+  /* Orange active */
+  --load-models-button-active-border-color: #ff6600;
+  /* Orange active border */
+  --load-models-button-disabled-background-color: rgba(128, 128, 128, 0.2);
+  /* Gray disabled */
+  --load-models-button-disabled-color: #666666;
+  /* Gray disabled text */
+  --load-models-button-disabled-border-color: #666666;
+  /* Gray disabled border */
 
   /* Icons */
-  --button-icon-color: #00ffff;  /* Cyan icons */
+  --button-icon-color: #00ffff;
+  /* Cyan icons */
 }
 
 /* ========================================
@@ -120,27 +185,42 @@
 
 .theme-nsx {
   /* Tone Selection */
-  --tone-select-background-color: transparent;  /* Transparent background */
-  --tone-select-color: #00ffff;                 /* Cyan text */
-  --tone-select-border-color: #00ffff;          /* Cyan border */
+  --tone-select-background-color: transparent;
+  /* Transparent background */
+  --tone-select-color: #00ffff;
+  /* Cyan text */
+  --tone-select-border-color: #00ffff;
+  /* Cyan border */
 
   /* Text Inputs & Textareas */
-  --text-input-background-color: rgba(0, 255, 255, 0.05);  /* Very subtle cyan background */
-  --text-input-color: #00ffff;                             /* Cyan text */
-  --text-input-border-color: #00ffff;                      /* Cyan border */
-  --text-output-background-color: rgba(0, 255, 255, 0.05); /* Very subtle cyan background */
-  --text-output-color: #00ffff;                            /* Cyan text */
-  --text-output-border-color: #00ffff;                     /* Cyan border */
+  --text-input-background-color: rgba(0, 255, 255, 0.05);
+  /* Very subtle cyan background */
+  --text-input-color: #00ffff;
+  /* Cyan text */
+  --text-input-border-color: #00ffff;
+  /* Cyan border */
+  --text-output-background-color: rgba(0, 255, 255, 0.05);
+  /* Very subtle cyan background */
+  --text-output-color: #00ffff;
+  /* Cyan text */
+  --text-output-border-color: #00ffff;
+  /* Cyan border */
 
   /* API Key Input */
-  --api-key-input-background-color: rgba(0, 255, 255, 0.05); /* Very subtle cyan background */
-  --api-key-input-color: #00ffff;                            /* Cyan text */
-  --api-key-input-border-color: #00ffff;                     /* Cyan border */
+  --api-key-input-background-color: rgba(0, 255, 255, 0.05);
+  /* Very subtle cyan background */
+  --api-key-input-color: #00ffff;
+  /* Cyan text */
+  --api-key-input-border-color: #00ffff;
+  /* Cyan border */
 
   /* Model Selection */
-  --model-select-background-color: rgba(0, 255, 255, 0.05);  /* Very subtle cyan background */
-  --model-select-color: #00ffff;                             /* Cyan text */
-  --model-select-border-color: #00ffff;                      /* Cyan border */
+  --model-select-background-color: rgba(0, 255, 255, 0.05);
+  /* Very subtle cyan background */
+  --model-select-color: #00ffff;
+  /* Cyan text */
+  --model-select-border-color: #00ffff;
+  /* Cyan border */
 }
 
 /* ========================================
@@ -149,14 +229,20 @@
 
 .theme-nsx {
   /* Labels */
-  --input-label-color: #00ffff;   /* Cyan labels */
-  --output-label-color: #00ffff;  /* Cyan labels */
-  --section-title-color: #00ffff; /* Cyan section titles */
+  --input-label-color: #00ffff;
+  /* Cyan labels */
+  --output-label-color: #00ffff;
+  /* Cyan labels */
+  --section-title-color: #00ffff;
+  /* Cyan section titles */
 
   /* Descriptions */
-  --api-key-description-color: #ffffff;  /* White description text */
-  --api-key-link-color: #00ffff;         /* Cyan links */
-  --api-key-link-hover-color: #0184ff;   /* Blue hover links */
+  --api-key-description-color: #ffffff;
+  /* White description text */
+  --api-key-link-color: #00ffff;
+  /* Cyan links */
+  --api-key-link-hover-color: #0184ff;
+  /* Blue hover links */
 }
 
 /* ========================================
@@ -165,17 +251,24 @@
 
 .theme-nsx {
   /* Overlay Container */
-  --overlay-container-background-color: rgba(0, 255, 255, 0.05); /* Very subtle cyan background */
-  --overlay-container-border-color: #00ffff;                     /* Cyan border */
+  --overlay-container-background-color: rgba(0, 255, 255, 0.05);
+  /* Very subtle cyan background */
+  --overlay-container-border-color: #00ffff;
+  /* Cyan border */
 
   /* Settings Container */
-  --settings-container-background-color: rgba(0, 255, 255, 0.05); /* Very subtle cyan background */
-  --settings-container-border-color: #00ffff;                     /* Cyan border */
+  --settings-container-background-color: rgba(0, 255, 255, 0.05);
+  /* Very subtle cyan background */
+  --settings-container-border-color: #00ffff;
+  /* Cyan border */
 
   /* Current Settings Display */
-  --current-settings-display-background-color: rgba(0, 255, 255, 0.05); /* Very subtle cyan background */
-  --current-settings-display-border-color: #00ffff;                     /* Cyan border */
-  --current-settings-display-color: #00ffff;                            /* Cyan text */
+  --current-settings-display-background-color: rgba(0, 255, 255, 0.05);
+  /* Very subtle cyan background */
+  --current-settings-display-border-color: #00ffff;
+  /* Cyan border */
+  --current-settings-display-color: #00ffff;
+  /* Cyan text */
 }
 
 /* ========================================
@@ -184,22 +277,34 @@
 
 .theme-nsx {
   /* Loading Indicator */
-  --loading-indicator-background-color: rgba(0, 255, 255, 0.05); /* Very subtle cyan background */
-  --loading-indicator-border-color: #00ffff;                     /* Cyan border */
-  --spinner-color: #00ffff;                                      /* Cyan spinner */
-  --loading-text-color: #00ffff;                                 /* Cyan loading text */
+  --loading-indicator-background-color: rgba(0, 255, 255, 0.05);
+  /* Very subtle cyan background */
+  --loading-indicator-border-color: #00ffff;
+  /* Cyan border */
+  --spinner-color: #00ffff;
+  /* Cyan spinner */
+  --loading-text-color: #00ffff;
+  /* Cyan loading text */
 
   /* Message Displays */
-  --message-display-success-background-color: rgba(0, 255, 0, 0.1);  /* Green success background */
-  --message-display-success-color: #00ff00;                          /* Green success text */
-  --message-display-success-border-color: #00ff00;                   /* Green success border */
-  --message-display-error-background-color: rgba(255, 102, 0, 0.1);  /* Orange error background */
-  --message-display-error-color: #ff6600;                             /* Orange error text */
-  --message-display-error-border-color: #ff6600;                      /* Orange error border */
+  --message-display-success-background-color: rgba(0, 255, 0, 0.1);
+  /* Green success background */
+  --message-display-success-color: #00ff00;
+  /* Green success text */
+  --message-display-success-border-color: #00ff00;
+  /* Green success border */
+  --message-display-error-background-color: rgba(255, 102, 0, 0.1);
+  /* Orange error background */
+  --message-display-error-color: #ff6600;
+  /* Orange error text */
+  --message-display-error-border-color: #ff6600;
+  /* Orange error border */
 
   /* Message Icons */
-  --message-icon-success-color: #00ff00;  /* Green success icon */
-  --message-icon-error-color: #ff6600;    /* Orange error icon */
+  --message-icon-success-color: #00ff00;
+  /* Green success icon */
+  --message-icon-error-color: #ff6600;
+  /* Orange error icon */
 }
 
 /* ========================================
@@ -208,25 +313,38 @@
 
 .theme-nsx {
   /* Scrollbar Track */
-  --scrollbar-track-background-color: #000000;                       /* Black track background */
-  --scrollbar-track-border-color: #00ffff;                           /* Cyan track border */
+  --scrollbar-track-background-color: #000000;
+  /* Black track background */
+  --scrollbar-track-border-color: #00ffff;
+  /* Cyan track border */
 
   /* Scrollbar Thumb */
-  --scrollbar-thumb-background-color: rgba(0, 255, 255, 0.3);        /* Semi-transparent cyan thumb */
-  --scrollbar-thumb-border-color: #00ffff;                           /* Cyan thumb border */
-  --scrollbar-thumb-hover-background-color: rgba(0, 255, 255, 0.5);  /* More opaque cyan on hover */
-  --scrollbar-thumb-hover-border-color: #ff6600;                     /* Orange hover border */
-  --scrollbar-thumb-active-background-color: rgba(255, 102, 0, 0.4); /* Orange active background */
-  --scrollbar-thumb-active-border-color: #ff6600;                    /* Orange active border */
+  --scrollbar-thumb-background-color: rgba(0, 255, 255, 0.3);
+  /* Semi-transparent cyan thumb */
+  --scrollbar-thumb-border-color: #00ffff;
+  /* Cyan thumb border */
+  --scrollbar-thumb-hover-background-color: rgba(0, 255, 255, 0.5);
+  /* More opaque cyan on hover */
+  --scrollbar-thumb-hover-border-color: #ff6600;
+  /* Orange hover border */
+  --scrollbar-thumb-active-background-color: rgba(255, 102, 0, 0.4);
+  /* Orange active background */
+  --scrollbar-thumb-active-border-color: #ff6600;
+  /* Orange active border */
 
   /* Scrollbar Corner & Buttons */
-  --scrollbar-corner-background-color: #000000;                      /* Black corner background */
-  --scrollbar-corner-border-color: #00ffff;                          /* Cyan corner border */
-  --scrollbar-button-background-color: rgba(0, 255, 255, 0.1);       /* Cyan button background */
-  --scrollbar-button-border-color: #00ffff;                          /* Cyan button border */
+  --scrollbar-corner-background-color: #000000;
+  /* Black corner background */
+  --scrollbar-corner-border-color: #00ffff;
+  /* Cyan corner border */
+  --scrollbar-button-background-color: rgba(0, 255, 255, 0.1);
+  /* Cyan button background */
+  --scrollbar-button-border-color: #00ffff;
+  /* Cyan button border */
 
   /* Firefox Scrollbar */
-  --scrollbar-color: rgba(0, 255, 255, 0.3) #000000;  /* Cyan thumb, black track */
+  --scrollbar-color: rgba(0, 255, 255, 0.3) #000000;
+  /* Cyan thumb, black track */
 }
 
 /* ========================================
@@ -235,10 +353,16 @@
 
 .theme-nsx {
   /* Select Dropdown Options */
-  --select-option-background-color: #000000;                         /* Black option background */
-  --select-option-color: #00ffff;                                    /* Cyan option text */
-  --select-option-hover-background-color: rgba(0, 255, 255, 0.1);    /* Cyan hover background */
-  --select-option-hover-color: #00ffff;                              /* Cyan hover text */
-  --select-option-checked-background-color: rgba(0, 255, 255, 0.2);  /* Cyan checked background */
-  --select-option-checked-color: #00ffff;                            /* Cyan checked text */
+  --select-option-background-color: #000000;
+  /* Black option background */
+  --select-option-color: #00ffff;
+  /* Cyan option text */
+  --select-option-hover-background-color: rgba(0, 255, 255, 0.1);
+  /* Cyan hover background */
+  --select-option-hover-color: #00ffff;
+  /* Cyan hover text */
+  --select-option-checked-background-color: rgba(0, 255, 255, 0.2);
+  /* Cyan checked background */
+  --select-option-checked-color: #00ffff;
+  /* Cyan checked text */
 }

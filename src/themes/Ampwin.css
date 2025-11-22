@@ -5,23 +5,30 @@
 /* Base Typography & Layout */
 .theme-ampwin {
   /* Typography */
-  --font-family: 'MS Sans Serif', 'Microsoft Sans Serif', 'Arial', sans-serif;
+  --font-family: 'Play', 'MS Sans Serif', 'Microsoft Sans Serif', 'Arial', sans-serif;
   --font-size: 11px;
   --line-height: 16px;
   --font-weight: 400;
 
   /* Base Colors */
-  --color: #ffffff;                    /* White text like Winamp */
-  --background-color: #2a2a2a;         /* Dark gray background like Winamp */
-  --border-color: #666666;             /* Gray borders like Winamp */
+  --color: #ffffff;
+  /* White text like Winamp */
+  --background-color: #2a2a2a;
+  /* Dark gray background like Winamp */
+  --border-color: #666666;
+  /* Gray borders like Winamp */
 
   /* Border Radius */
-  --button-border-radius1: 0;          /* Sharp corners like classic Winamp */
-  --button-border-radius2: 0;          /* Sharp corners for inputs */
+  --button-border-radius1: 0;
+  /* Sharp corners like classic Winamp */
+  --button-border-radius2: 0;
+  /* Sharp corners for inputs */
 
   /* Links */
-  --link-color: #ffffff;               /* White links */
-  --link-hover-color: #ffaa00;         /* Orange on hover */
+  --link-color: #ffffff;
+  /* White links */
+  --link-hover-color: #ffaa00;
+  /* Orange on hover */
 }
 
 /* ========================================
@@ -30,23 +37,35 @@
 
 .theme-ampwin {
   /* Drag Region */
-  --drag-region-border-bottom-color: #666666;    /* Gray border */
-  --drag-region-background-color: #1a1a1a;       /* Darker gray background */
+  --drag-region-border-bottom-color: #666666;
+  /* Gray border */
+  --drag-region-background-color: #1a1a1a;
+  /* Darker gray background */
 
   /* Navigation Tabs */
-  --active-tab-background-color: #505050;        /* Medium gray active tab */
-  --active-tab-color: #ffffff;                   /* White text */
-  --active-tab-border-color: #666666;            /* Gray border */
+  --active-tab-background-color: #505050;
+  /* Medium gray active tab */
+  --active-tab-color: #ffffff;
+  /* White text */
+  --active-tab-border-color: #666666;
+  /* Gray border */
 
-  --inactive-tab-background-color: #404040;      /* Dark gray inactive tab */
-  --inactive-tab-color: #ffffff;                 /* White text */
-  --inactive-tab-border-color: #666666;          /* Gray border */
+  --inactive-tab-background-color: #404040;
+  /* Dark gray inactive tab */
+  --inactive-tab-color: #ffffff;
+  /* White text */
+  --inactive-tab-border-color: #666666;
+  /* Gray border */
 
   /* Tab Interactions */
-  --tab-hover-background-color: #555555;         /* Gray hover background */
-  --tab-hover-border-color: #777777;             /* Light gray hover border */
-  --tab-active-background-color: #606060;        /* Gray active state */
-  --tab-active-border-color: #777777;            /* Light gray border */
+  --tab-hover-background-color: #555555;
+  /* Gray hover background */
+  --tab-hover-border-color: #777777;
+  /* Light gray hover border */
+  --tab-active-background-color: #606060;
+  /* Gray active state */
+  --tab-active-border-color: #777777;
+  /* Light gray border */
 }
 
 /* ========================================
@@ -55,63 +74,109 @@
 
 .theme-ampwin {
   /* Button Base */
-  --button-hover-border-color: #777777;                              /* Light gray hover border */
-  --button-hover-background-color: #555555;                          /* Gray hover background */
-  --button-active-border-color: #777777;                             /* Light gray active border */
-  --button-active-background-color: #606060;                         /* Gray active background */
+  --button-hover-border-color: #777777;
+  /* Light gray hover border */
+  --button-hover-background-color: #555555;
+  /* Gray hover background */
+  --button-active-border-color: #777777;
+  /* Light gray active border */
+  --button-active-background-color: #606060;
+  /* Gray active background */
 
   /* Action Buttons (Proofread, Tone, Draft) */
-  --action-button-background-color: #505050;                        /* Medium gray background */
-  --action-button-color: #ffffff;                                   /* White text */
-  --action-button-border-color: #666666;                            /* Gray border */
-  --action-button-active-background-color: #ffaa00;                 /* Orange when active */
-  --action-button-active-color: #2a2a2a;                            /* Dark text when active */
-  --action-button-active-border-color: #ffaa00;                     /* Orange border when active */
-  --action-button-hover-background-color: #555555;                   /* Gray hover background */
-  --action-button-hover-border-color: #777777;                      /* Light gray hover border */
+  --action-button-background-color: #505050;
+  /* Medium gray background */
+  --action-button-color: #ffffff;
+  /* White text */
+  --action-button-border-color: #666666;
+  /* Gray border */
+  --action-button-active-background-color: #ffaa00;
+  /* Orange when active */
+  --action-button-active-color: #2a2a2a;
+  /* Dark text when active */
+  --action-button-active-border-color: #ffaa00;
+  /* Orange border when active */
+  --action-button-hover-background-color: #555555;
+  /* Gray hover background */
+  --action-button-hover-border-color: #777777;
+  /* Light gray hover border */
 
   /* Send Button */
-  --send-button-background-color: #505050;                          /* Medium gray background */
-  --send-button-color: #ffffff;                                     /* White text */
-  --send-button-border-color: #666666;                              /* Gray border */
-  --send-button-hover-background-color: #555555;                     /* Gray hover background */
-  --send-button-hover-border-color: #777777;                        /* Light gray hover border */
-  --send-button-active-background-color: #606060;                    /* Gray active background */
-  --send-button-active-border-color: #777777;                       /* Light gray active border */
+  --send-button-background-color: #505050;
+  /* Medium gray background */
+  --send-button-color: #ffffff;
+  /* White text */
+  --send-button-border-color: #666666;
+  /* Gray border */
+  --send-button-hover-background-color: #555555;
+  /* Gray hover background */
+  --send-button-hover-border-color: #777777;
+  /* Light gray hover border */
+  --send-button-active-background-color: #606060;
+  /* Gray active background */
+  --send-button-active-border-color: #777777;
+  /* Light gray active border */
 
   /* Copy Button */
-  --copy-button-background-color: #505050;                          /* Medium gray background */
-  --copy-button-color: #ffffff;                                     /* White text */
-  --copy-button-border-color: #666666;                              /* Gray border */
-  --copy-button-copied-background-color: #ffaa00;                   /* Orange when copied */
-  --copy-button-copied-color: #2a2a2a;                              /* Dark text when copied */
-  --copy-button-copied-border-color: #ffaa00;                       /* Orange border when copied */
-  --copy-button-hover-background-color: #555555;                     /* Gray hover background */
-  --copy-button-hover-border-color: #777777;                        /* Light gray hover border */
-  --copy-button-active-background-color: #606060;                    /* Gray active background */
-  --copy-button-active-border-color: #777777;                       /* Light gray active border */
+  --copy-button-background-color: #505050;
+  /* Medium gray background */
+  --copy-button-color: #ffffff;
+  /* White text */
+  --copy-button-border-color: #666666;
+  /* Gray border */
+  --copy-button-copied-background-color: #ffaa00;
+  /* Orange when copied */
+  --copy-button-copied-color: #2a2a2a;
+  /* Dark text when copied */
+  --copy-button-copied-border-color: #ffaa00;
+  /* Orange border when copied */
+  --copy-button-hover-background-color: #555555;
+  /* Gray hover background */
+  --copy-button-hover-border-color: #777777;
+  /* Light gray hover border */
+  --copy-button-active-background-color: #606060;
+  /* Gray active background */
+  --copy-button-active-border-color: #777777;
+  /* Light gray active border */
 
   /* Settings Buttons */
-  --save-key-button-background-color: #505050;                      /* Medium gray background */
-  --save-key-button-color: #ffffff;                                 /* White text */
-  --save-key-button-border-color: #666666;                          /* Gray border */
-  --save-key-button-hover-border-color: #777777;                    /* Light gray hover border */
-  --save-key-button-active-background-color: #606060;               /* Gray active background */
-  --save-key-button-active-border-color: #777777;                   /* Light gray active border */
+  --save-key-button-background-color: #505050;
+  /* Medium gray background */
+  --save-key-button-color: #ffffff;
+  /* White text */
+  --save-key-button-border-color: #666666;
+  /* Gray border */
+  --save-key-button-hover-border-color: #777777;
+  /* Light gray hover border */
+  --save-key-button-active-background-color: #606060;
+  /* Gray active background */
+  --save-key-button-active-border-color: #777777;
+  /* Light gray active border */
 
-  --load-models-button-background-color: #505050;                   /* Medium gray background */
-  --load-models-button-color: #ffffff;                              /* White text */
-  --load-models-button-border-color: #666666;                       /* Gray border */
-  --load-models-button-hover-background-color: #555555;              /* Gray hover background */
-  --load-models-button-hover-border-color: #777777;                 /* Light gray hover border */
-  --load-models-button-active-background-color: #606060;             /* Gray active background */
-  --load-models-button-active-border-color: #777777;                /* Light gray active border */
-  --load-models-button-disabled-background-color: #404040;           /* Dark gray disabled */
-  --load-models-button-disabled-color: #888888;                     /* Gray disabled text */
-  --load-models-button-disabled-border-color: #555555;              /* Gray disabled border */
+  --load-models-button-background-color: #505050;
+  /* Medium gray background */
+  --load-models-button-color: #ffffff;
+  /* White text */
+  --load-models-button-border-color: #666666;
+  /* Gray border */
+  --load-models-button-hover-background-color: #555555;
+  /* Gray hover background */
+  --load-models-button-hover-border-color: #777777;
+  /* Light gray hover border */
+  --load-models-button-active-background-color: #606060;
+  /* Gray active background */
+  --load-models-button-active-border-color: #777777;
+  /* Light gray active border */
+  --load-models-button-disabled-background-color: #404040;
+  /* Dark gray disabled */
+  --load-models-button-disabled-color: #888888;
+  /* Gray disabled text */
+  --load-models-button-disabled-border-color: #555555;
+  /* Gray disabled border */
 
   /* Icons */
-  --button-icon-color: #ffffff;  /* White icons */
+  --button-icon-color: #ffffff;
+  /* White icons */
 }
 
 /* ========================================
@@ -120,27 +185,42 @@
 
 .theme-ampwin {
   /* Tone Selection */
-  --tone-select-background-color: #505050;                          /* Medium gray background */
-  --tone-select-color: #ffffff;                                     /* White text */
-  --tone-select-border-color: #666666;                              /* Gray border */
+  --tone-select-background-color: #505050;
+  /* Medium gray background */
+  --tone-select-color: #ffffff;
+  /* White text */
+  --tone-select-border-color: #666666;
+  /* Gray border */
 
   /* Text Inputs & Textareas */
-  --text-input-background-color: #404040;                           /* Dark gray background */
-  --text-input-color: #ffffff;                                      /* White text */
-  --text-input-border-color: #666666;                               /* Gray border */
-  --text-output-background-color: #404040;                          /* Dark gray background */
-  --text-output-color: #ffffff;                                     /* White text */
-  --text-output-border-color: #666666;                              /* Gray border */
+  --text-input-background-color: #404040;
+  /* Dark gray background */
+  --text-input-color: #ffffff;
+  /* White text */
+  --text-input-border-color: #666666;
+  /* Gray border */
+  --text-output-background-color: #404040;
+  /* Dark gray background */
+  --text-output-color: #ffffff;
+  /* White text */
+  --text-output-border-color: #666666;
+  /* Gray border */
 
   /* API Key Input */
-  --api-key-input-background-color: #404040;                        /* Dark gray background */
-  --api-key-input-color: #ffffff;                                   /* White text */
-  --api-key-input-border-color: #666666;                            /* Gray border */
+  --api-key-input-background-color: #404040;
+  /* Dark gray background */
+  --api-key-input-color: #ffffff;
+  /* White text */
+  --api-key-input-border-color: #666666;
+  /* Gray border */
 
   /* Model Selection */
-  --model-select-background-color: #404040;                         /* Dark gray background */
-  --model-select-color: #ffffff;                                    /* White text */
-  --model-select-border-color: #666666;                             /* Gray border */
+  --model-select-background-color: #404040;
+  /* Dark gray background */
+  --model-select-color: #ffffff;
+  /* White text */
+  --model-select-border-color: #666666;
+  /* Gray border */
 }
 
 /* ========================================
@@ -149,14 +229,20 @@
 
 .theme-ampwin {
   /* Labels */
-  --input-label-color: #ffffff;   /* White labels */
-  --output-label-color: #ffffff;  /* White labels */
-  --section-title-color: #ffffff; /* White section titles */
+  --input-label-color: #ffffff;
+  /* White labels */
+  --output-label-color: #ffffff;
+  /* White labels */
+  --section-title-color: #ffffff;
+  /* White section titles */
 
   /* Descriptions */
-  --api-key-description-color: #cccccc;  /* Light gray description text */
-  --api-key-link-color: #ffffff;         /* White links */
-  --api-key-link-hover-color: #ffaa00;   /* Orange hover links */
+  --api-key-description-color: #cccccc;
+  /* Light gray description text */
+  --api-key-link-color: #ffffff;
+  /* White links */
+  --api-key-link-hover-color: #ffaa00;
+  /* Orange hover links */
 }
 
 /* ========================================
@@ -165,17 +251,24 @@
 
 .theme-ampwin {
   /* Overlay Container */
-  --overlay-container-background-color: #404040;                    /* Dark gray background */
-  --overlay-container-border-color: #666666;                        /* Gray border */
+  --overlay-container-background-color: #404040;
+  /* Dark gray background */
+  --overlay-container-border-color: #666666;
+  /* Gray border */
 
   /* Settings Container */
-  --settings-container-background-color: #404040;                   /* Dark gray background */
-  --settings-container-border-color: #666666;                       /* Gray border */
+  --settings-container-background-color: #404040;
+  /* Dark gray background */
+  --settings-container-border-color: #666666;
+  /* Gray border */
 
   /* Current Settings Display */
-  --current-settings-display-background-color: #505050;             /* Medium gray background */
-  --current-settings-display-border-color: #666666;                 /* Gray border */
-  --current-settings-display-color: #ffffff;                        /* White text */
+  --current-settings-display-background-color: #505050;
+  /* Medium gray background */
+  --current-settings-display-border-color: #666666;
+  /* Gray border */
+  --current-settings-display-color: #ffffff;
+  /* White text */
 }
 
 /* ========================================
@@ -184,22 +277,34 @@
 
 .theme-ampwin {
   /* Loading Indicator */
-  --loading-indicator-background-color: rgba(255, 170, 0, 0.05);    /* Very subtle orange background */
-  --loading-indicator-border-color: #ffaa00;                        /* Orange border */
-  --spinner-color: #ffaa00;                                         /* Orange spinner */
-  --loading-text-color: #ffaa00;                                    /* Orange loading text */
+  --loading-indicator-background-color: rgba(255, 170, 0, 0.05);
+  /* Very subtle orange background */
+  --loading-indicator-border-color: #ffaa00;
+  /* Orange border */
+  --spinner-color: #ffaa00;
+  /* Orange spinner */
+  --loading-text-color: #ffaa00;
+  /* Orange loading text */
 
   /* Message Displays */
-  --message-display-success-background-color: rgba(255, 170, 0, 0.1); /* Orange success background */
-  --message-display-success-color: #ffaa00;                         /* Orange success text */
-  --message-display-success-border-color: #ffaa00;                  /* Orange success border */
-  --message-display-error-background-color: rgba(255, 255, 255, 0.1); /* White error background */
-  --message-display-error-color: #ffffff;                           /* White error text */
-  --message-display-error-border-color: #ffffff;                    /* White error border */
+  --message-display-success-background-color: rgba(255, 170, 0, 0.1);
+  /* Orange success background */
+  --message-display-success-color: #ffaa00;
+  /* Orange success text */
+  --message-display-success-border-color: #ffaa00;
+  /* Orange success border */
+  --message-display-error-background-color: rgba(255, 255, 255, 0.1);
+  /* White error background */
+  --message-display-error-color: #ffffff;
+  /* White error text */
+  --message-display-error-border-color: #ffffff;
+  /* White error border */
 
   /* Message Icons */
-  --message-icon-success-color: #ffaa00;  /* Orange success icon */
-  --message-icon-error-color: #ffffff;    /* White error icon */
+  --message-icon-success-color: #ffaa00;
+  /* Orange success icon */
+  --message-icon-error-color: #ffffff;
+  /* White error icon */
 }
 
 /* ========================================
@@ -208,25 +313,38 @@
 
 .theme-ampwin {
   /* Scrollbar Track */
-  --scrollbar-track-background-color: #1a1a1a;                      /* Dark gray track */
-  --scrollbar-track-border-color: #666666;                          /* Gray track border */
+  --scrollbar-track-background-color: #1a1a1a;
+  /* Dark gray track */
+  --scrollbar-track-border-color: #666666;
+  /* Gray track border */
 
   /* Scrollbar Thumb */
-  --scrollbar-thumb-background-color: #888888;                      /* Gray thumb */
-  --scrollbar-thumb-border-color: #666666;                          /* Gray thumb border */
-  --scrollbar-thumb-hover-background-color: #999999;                 /* Lighter gray on hover */
-  --scrollbar-thumb-hover-border-color: #777777;                    /* Light gray hover border */
-  --scrollbar-thumb-active-background-color: #aaaaaa;               /* Even lighter gray when active */
-  --scrollbar-thumb-active-border-color: #777777;                   /* Light gray active border */
+  --scrollbar-thumb-background-color: #888888;
+  /* Gray thumb */
+  --scrollbar-thumb-border-color: #666666;
+  /* Gray thumb border */
+  --scrollbar-thumb-hover-background-color: #999999;
+  /* Lighter gray on hover */
+  --scrollbar-thumb-hover-border-color: #777777;
+  /* Light gray hover border */
+  --scrollbar-thumb-active-background-color: #aaaaaa;
+  /* Even lighter gray when active */
+  --scrollbar-thumb-active-border-color: #777777;
+  /* Light gray active border */
 
   /* Scrollbar Corner & Buttons */
-  --scrollbar-corner-background-color: #1a1a1a;                      /* Dark gray corner */
-  --scrollbar-corner-border-color: #666666;                         /* Gray corner border */
-  --scrollbar-button-background-color: #404040;                     /* Gray button background */
-  --scrollbar-button-border-color: #666666;                         /* Gray button border */
+  --scrollbar-corner-background-color: #1a1a1a;
+  /* Dark gray corner */
+  --scrollbar-corner-border-color: #666666;
+  /* Gray corner border */
+  --scrollbar-button-background-color: #404040;
+  /* Gray button background */
+  --scrollbar-button-border-color: #666666;
+  /* Gray button border */
 
   /* Firefox Scrollbar */
-  --scrollbar-color: #888888 #1a1a1a;  /* Gray thumb, dark gray track */
+  --scrollbar-color: #888888 #1a1a1a;
+  /* Gray thumb, dark gray track */
 }
 
 /* ========================================
@@ -235,10 +353,16 @@
 
 .theme-ampwin {
   /* Select Dropdown Options */
-  --select-option-background-color: #505050;                        /* Medium gray option background */
-  --select-option-color: #ffffff;                                   /* White option text */
-  --select-option-hover-background-color: #555555;                  /* Gray hover background */
-  --select-option-hover-color: #ffffff;                             /* White hover text */
-  --select-option-checked-background-color: #ffaa00;                /* Orange checked background */
-  --select-option-checked-color: #2a2a2a;                           /* Dark checked text */
+  --select-option-background-color: #505050;
+  /* Medium gray option background */
+  --select-option-color: #ffffff;
+  /* White option text */
+  --select-option-hover-background-color: #555555;
+  /* Gray hover background */
+  --select-option-hover-color: #ffffff;
+  /* White hover text */
+  --select-option-checked-background-color: #ffaa00;
+  /* Orange checked background */
+  --select-option-checked-color: #2a2a2a;
+  /* Dark checked text */
 }
