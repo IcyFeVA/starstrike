@@ -10,6 +10,7 @@
 .logo.react:hover {
   filter: drop-shadow(0 0 2em #61dafb);
 }
+
 body {
   font-family: var(--font-family);
   font-size: var(--font-size);
@@ -32,7 +33,7 @@ body {
 }
 
 * {
-    transition: none !important;
+  transition: none !important;
 }
 
 #app {
@@ -42,7 +43,16 @@ body {
   overflow: auto;
 }
 
-p, span, h1, h2, h3, h4, h5, h6, strong, label {
+p,
+span,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+strong,
+label {
   user-select: none;
   -webkit-user-select: none;
 }
@@ -98,7 +108,7 @@ button {
   align-items: center;
   gap: 4px;
   cursor: default;
-  border-radius: var(--button-border-radius1); 
+  border-radius: var(--button-border-radius1);
 }
 
 button:hover {
@@ -116,7 +126,8 @@ button {
   outline: none;
 }
 
-input, textarea {
+input,
+textarea {
   border-radius: var(--button-border-radius2);
 }
 
@@ -196,7 +207,8 @@ input, textarea {
   /* Use the webkit prefixed property for macOS draggable regions. Remove the
      non-standard `app-region` that caused the linter warning. */
   -webkit-app-region: drag;
-  height: 20px; /* slightly larger hit area for easier dragging on macOS */
+  height: 20px;
+  /* slightly larger hit area for easier dragging on macOS */
   flex: 1;
   cursor: grab;
   display: flex;
@@ -207,8 +219,10 @@ input, textarea {
   background-color: var(--drag-region-background-color);
   user-select: none;
   -webkit-user-select: none;
-  z-index: 1; /* keep it above background overlays */
-  pointer-events: auto; /* ensure it receives pointer events */
+  z-index: 1;
+  /* keep it above background overlays */
+  pointer-events: auto;
+  /* ensure it receives pointer events */
 }
 
 /* Keep the inner content draggable too so the full area works when
@@ -819,6 +833,14 @@ input, textarea {
   color: var(--model-select-color);
   font-family: var(--font-family);
   box-sizing: border-box;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 8px center;
+  background-size: 12px;
+  padding-right: 24px;
 }
 
 .settings__spacer {
@@ -1034,8 +1056,7 @@ input, textarea {
   flex: 1;
 }
 
-.settings-section {
-}
+.settings-section {}
 
 .spacer-16 {
   height: 16px;
@@ -1110,7 +1131,8 @@ textarea {
   font-size: var(--font-size);
 }
 
-.api-key-link, .api-key-link:visited {
+.api-key-link,
+.api-key-link:visited {
   color: var(--api-key-link-color);
 }
 

@@ -168,7 +168,7 @@ const AppSettings: React.FC = () => {
             <select
               value={theme}
               onChange={(e) => setTheme(e.target.value as 'NSX' | 'Aqua' | 'AquaDark' | 'Abelton' | 'Lamasass' | 'ICQ' | 'Ampwin' | 'Maverick')}
-              className="app-settings__theme-select"
+              className="settings__model-select"
             >
               <option value="NSX">NSX</option>
               <option value="Ampwin">Ampwin</option>

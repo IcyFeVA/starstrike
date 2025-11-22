@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { invoke } from '@tauri-apps/api/core';
 import { Key, Loader2, Check, AlertCircle } from 'lucide-react';
 
-interface SettingsProps {}
+interface SettingsProps { }
 
 interface Model {
   id: string;
@@ -78,7 +78,7 @@ const Settings: React.FC<SettingsProps> = () => {
       .then(() => {
         setMessage({ type: 'success', text: 'API key saved successfully!' });
         // Also keep a local copy as a fallback
-        try { localStorage.setItem('openrouter_api_key', apiKey); } catch {}
+        try { localStorage.setItem('openrouter_api_key', apiKey); } catch { }
         // Automatically fetch models after saving API key
         fetchModels();
       })
