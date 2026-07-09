@@ -198,12 +198,6 @@ const Settings: React.FC<SettingsProps> = () => {
             ) : null}
             {isLoadingModels ? "Loading Models..." : "Load Available Models"}
           </button>
-
-          {selectedModel && (
-            <div className="settings__current-model">
-              <strong>Current Model:</strong> {selectedModel}
-            </div>
-          )}
         </section>
 
         {/* Model Selection Section */}
@@ -230,6 +224,11 @@ const Settings: React.FC<SettingsProps> = () => {
                     </option>
                   ))}
               </select>
+              {selectedModel && (
+                <div className="settings__current-model">
+                  <strong>Current Model:</strong> {selectedModel}
+                </div>
+              )}
             </div>
           </section>
         )}
