@@ -18,6 +18,28 @@ const API_KEY: &str = "openrouter_api_key";
 
 // Global static for debouncing shortcut triggers
 static LAST_SHORTCUT_TRIGGER: Mutex<Option<Instant>> = Mutex::new(None);
+// Keep the app's desired window visibility in sync across shortcut and close-button flows
+static MAIN_WINDOW_VISIBLE: Mutex<bool> = Mutex::new(true);
+
+fn apply_main_window_visibility(app: &tauri::AppHandle, visible: bool) -> Result<(), String> {
+    if let Some(window) = app.get_webview_window("main") {
+        if visible {
+            window.show().map_err(|e| e.to_string())?;
+            window.center().map_err(|e| e.to_string())?;
+            window.set_focus().map_err(|e| e.to_string())?;
+        } else {
+            window.hide().map_err(|e| e.to_string())?;
+        }
+
+        if let Ok(mut state) = MAIN_WINDOW_VISIBLE.lock() {
+            *state = visible;
+        }
+
+        Ok(())
+    } else {
+        Err("Main window not found".to_string())
+    }
+}
 
 fn ensure_store_dir(app: &tauri::AppHandle) -> Result<(), String> {
     let app_data_dir = app.path().app_data_dir().map_err(|e| e.to_string())?;
@@ -46,7 +68,7 @@ async fn set_shortcut(app: tauri::AppHandle, shortcut: String) -> Result<(), Str
 
     let new_shortcut = Shortcut::from_str(&shortcut).map_err(|e| e.to_string())?;
 
-    let show_overlay_callback = move |app: &tauri::AppHandle, _shortcut: &Shortcut, _event: ShortcutEvent| {
+    let toggle_main_window_callback = move |app: &tauri::AppHandle, _shortcut: &Shortcut, _event: ShortcutEvent| {
         // Debounce rapid shortcut triggers (ignore if triggered within 200ms)
         if let Ok(mut last_trigger) = LAST_SHORTCUT_TRIGGER.lock() {
             if let Some(last) = *last_trigger {
@@ -59,14 +81,14 @@ async fn set_shortcut(app: tauri::AppHandle, shortcut: String) -> Result<(), Str
 
         let app_handle_clone = app.clone();
         tauri::async_runtime::spawn(async move {
-            if let Err(e) = show_overlay(app_handle_clone).await {
-                eprintln!("Failed to show overlay: {}", e);
+            if let Err(e) = toggle_main_window_visibility(app_handle_clone).await {
+                eprintln!("Failed to toggle main window visibility: {}", e);
             }
         });
     };
 
     app.global_shortcut()
-        .on_shortcut(new_shortcut, show_overlay_callback)
+        .on_shortcut(new_shortcut, toggle_main_window_callback)
         .map_err(|e| e.to_string())?;
 
     let store = StoreBuilder::new(&app, "settings.json").build().map_err(|e| e.to_string())?;
@@ -142,30 +164,22 @@ async fn set_api_key(app: tauri::AppHandle, api_key: String) -> Result<(), Strin
 }
 
 #[tauri::command]
-async fn show_overlay(app: tauri::AppHandle) -> Result<(), String> {
-    // Get the main window instead of trying to create a new overlay window
-    if let Some(window) = app.get_webview_window("main") {
-        if window.is_visible().unwrap_or(false) {
-            window.hide().map_err(|e| e.to_string())?;
-        } else {
-            window.show().map_err(|e| e.to_string())?;
-            window.center().map_err(|e| e.to_string())?;
-            window.set_focus().map_err(|e| e.to_string())?;
-        }
+async fn toggle_main_window_visibility(app: tauri::AppHandle) -> Result<(), String> {
+    let should_show = {
+        let visibility = MAIN_WINDOW_VISIBLE.lock().map_err(|_| "Window visibility state mutex poisoned".to_string())?;
+        !*visibility
+    };
+
+    if should_show {
+        apply_main_window_visibility(&app, true)
     } else {
-        return Err("Main window not found".to_string());
+        apply_main_window_visibility(&app, false)
     }
-    Ok(())
 }
 
 #[tauri::command]
-async fn hide_overlay(app: tauri::AppHandle) -> Result<(), String> {
-    if let Some(window) = app.get_webview_window("main") {
-        window.hide().map_err(|e| e.to_string())?;
-    } else {
-        return Err("Main window not found".to_string());
-    }
-    Ok(())
+async fn hide_main_window(app: tauri::AppHandle) -> Result<(), String> {
+    apply_main_window_visibility(&app, false)
 }
 
 #[tauri::command]
@@ -331,8 +345,8 @@ pub fn run() {
         .plugin(tauri_plugin_global_shortcut::Builder::new().build())
         .plugin(tauri_plugin_store::Builder::default().build())
         .invoke_handler(tauri::generate_handler![
-            show_overlay,
-            hide_overlay,
+            toggle_main_window_visibility,
+            hide_main_window,
             get_clipboard_text,
             set_clipboard_text,
             fetch_openrouter_models,
@@ -371,10 +385,7 @@ pub fn run() {
                 .on_menu_event(move |app, event| {
                     match event.id.as_ref() {
                         "show" => {
-                            if let Some(window) = app.get_webview_window("main") {
-                                let _ = window.show();
-                                let _ = window.set_focus();
-                            }
+                            let _ = apply_main_window_visibility(&app, true);
                         }
                         "startup" => {
                             let autostart_manager = app.autolaunch();
@@ -395,18 +406,28 @@ pub fn run() {
                 .build(app)?;
 
             let window = app.get_webview_window("main").unwrap();
-            
+            let window_visible = window.is_visible().unwrap_or(true);
+            if let Ok(mut state) = MAIN_WINDOW_VISIBLE.lock() {
+                *state = window_visible;
+            }
+
             // Check if autostart is enabled and hide window if so
             if let Ok(is_enabled) = app.autolaunch().is_enabled() {
                 if is_enabled {
                     let _ = window.hide();
+                    if let Ok(mut state) = MAIN_WINDOW_VISIBLE.lock() {
+                        *state = false;
+                    }
                 }
             }
-            
-            let window_ = window.clone();
+
+            let window_for_close = window.clone();
             window.on_window_event(move |event| {
                 if let tauri::WindowEvent::CloseRequested { api, .. } = event {
-                    window_.hide().unwrap();
+                    let _ = window_for_close.hide();
+                    if let Ok(mut state) = MAIN_WINDOW_VISIBLE.lock() {
+                        *state = false;
+                    }
                     api.prevent_close();
                 }
             });
