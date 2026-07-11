@@ -21,6 +21,18 @@ static LAST_SHORTCUT_TRIGGER: Mutex<Option<Instant>> = Mutex::new(None);
 // Keep the app's desired window visibility in sync across shortcut and close-button flows
 static MAIN_WINDOW_VISIBLE: Mutex<bool> = Mutex::new(true);
 
+fn sync_main_window_visibility_from_window(app: &tauri::AppHandle) -> Result<bool, String> {
+    if let Some(window) = app.get_webview_window("main") {
+        let visible = window.is_visible().unwrap_or(false);
+        if let Ok(mut state) = MAIN_WINDOW_VISIBLE.lock() {
+            *state = visible;
+        }
+        Ok(visible)
+    } else {
+        Err("Main window not found".to_string())
+    }
+}
+
 fn apply_main_window_visibility(app: &tauri::AppHandle, visible: bool) -> Result<(), String> {
     if let Some(window) = app.get_webview_window("main") {
         if visible {
@@ -165,10 +177,8 @@ async fn set_api_key(app: tauri::AppHandle, api_key: String) -> Result<(), Strin
 
 #[tauri::command]
 async fn toggle_main_window_visibility(app: tauri::AppHandle) -> Result<(), String> {
-    let should_show = {
-        let visibility = MAIN_WINDOW_VISIBLE.lock().map_err(|_| "Window visibility state mutex poisoned".to_string())?;
-        !*visibility
-    };
+    let is_visible = sync_main_window_visibility_from_window(&app)?;
+    let should_show = !is_visible;
 
     if should_show {
         apply_main_window_visibility(&app, true)
@@ -366,9 +376,10 @@ pub fn run() {
         ])
         .setup(|app| {
             let app_handle = app.handle().clone();
+            let shortcut_setup_handle = app_handle.clone();
             tauri::async_runtime::spawn(async move {
-                let shortcut = get_shortcut(app_handle.clone()).unwrap_or_else(|_| DEFAULT_SHORTCUT.to_string());
-                if let Err(e) = set_shortcut(app_handle.clone(), shortcut.clone()).await {
+                let shortcut = get_shortcut(shortcut_setup_handle.clone()).unwrap_or_else(|_| DEFAULT_SHORTCUT.to_string());
+                if let Err(e) = set_shortcut(shortcut_setup_handle.clone(), shortcut.clone()).await {
                     eprintln!("Failed to set initial shortcut: {}", e);
                 }
             });
@@ -414,20 +425,14 @@ pub fn run() {
             // Check if autostart is enabled and hide window if so
             if let Ok(is_enabled) = app.autolaunch().is_enabled() {
                 if is_enabled {
-                    let _ = window.hide();
-                    if let Ok(mut state) = MAIN_WINDOW_VISIBLE.lock() {
-                        *state = false;
-                    }
+                    let _ = apply_main_window_visibility(&app_handle, false);
                 }
             }
 
-            let window_for_close = window.clone();
+            let app_for_close = app_handle.clone();
             window.on_window_event(move |event| {
                 if let tauri::WindowEvent::CloseRequested { api, .. } = event {
-                    let _ = window_for_close.hide();
-                    if let Ok(mut state) = MAIN_WINDOW_VISIBLE.lock() {
-                        *state = false;
-                    }
+                    let _ = apply_main_window_visibility(&app_for_close, false);
                     api.prevent_close();
                 }
             });
