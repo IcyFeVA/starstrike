@@ -7,6 +7,12 @@ This repo is currently built around a Tauri 2 desktop shell with a React 19 + Ty
 
 ![Starstrike preview](public/preview.png)
 
+## Usage after you set your shortcut
+
+- copy text
+- shortcut opens window
+- hit enter key (window closes when set in settings)
+
 ## Stack
 
 - Tauri 2 desktop app shell
