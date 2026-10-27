@@ -7,6 +7,9 @@ This repo is currently built around a Tauri 2 desktop shell with a React 19 + Ty
 
 ![Starstrike preview](public/preview.png)
 
+## Tutorial (recommended)
+[Video](https://www.youtube.com/watch?v=8a8DnBP02CQ)
+
 ## Usage after you set your shortcut
 
 - copy text
