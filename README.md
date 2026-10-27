@@ -1,7 +1,7 @@
 
 # Starstrike
 
-Starstrike is a lightweight desktop utility for quick AI text actions from anywhere on the system. Press a global shortcut, paste or select text, choose an action, and send it to an OpenRouter model to proofread, rewrite, or draft content. The result is copied back to the clipboard so it fits naturally into the current workflow.
+Starstrike is a BYOK (Open Router) lightweight desktop utility for quick AI text actions from anywhere on the system. Press a global shortcut, paste or select text, choose an action, and send it to an OpenRouter model to proofread, rewrite, or draft content. The result is copied back to the clipboard so it fits naturally into the current workflow.
 
 This repo is currently built around a Tauri 2 desktop shell with a React 19 + TypeScript frontend and Rust-powered native integrations.
 
@@ -15,6 +15,10 @@ This repo is currently built around a Tauri 2 desktop shell with a React 19 + Ty
 - copy text
 - shortcut opens window
 - hit enter key (window closes when set in settings)
+
+## Recommended Model
+
+I'm using Gemini 3.5 Flash Lite. It's very fast. For longer or more complex text, it is recommended to use a more capable model.
 
 ## Stack
 
